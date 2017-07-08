@@ -1,6 +1,7 @@
 package com.directi.training.codesmells.smelly.chess;
 
 import com.directi.training.codesmells.smelly.pieces.*;
+import javafx.geometry.Pos;
 
 public class ChessBoard {
     private final Cell[][] _board;
@@ -74,19 +75,23 @@ public class ChessBoard {
         return cell.isEmpty() ? null : cell.getPiece();
     }
 
-    public boolean isValidMove(Position from, Position to) {
+    public boolean isValidMove(int fromRow, int fromColumn, int toRow, int toColumn) {
+        Position from = new Position(fromRow, fromColumn);
+        Position to = new Position(toRow, toColumn);
         return !isEmpty(from)
                 && getPiece(from).getColor() != getPiece(to).getColor()
                 && getPiece(from).isValidMove(from, to);
     }
 
-    public boolean movePiece(Position from, Position to) {
-        if (!isValidMove(from, to)) {
+    public boolean movePiece(int fromRow, int fromColumn, int toRow, int toColumn) {
+        if (!isValidMove(fromRow, fromColumn, toRow, toColumn)) {
             System.out.println("Invalid Move!");
             return false;
         }
-        updateIsKingDead(to);
-        updatePawnStatus(to);
+        updateIsKingDead(toRow, toColumn);
+        updatePawnStatus(toRow, toColumn);
+        Position from = new Position(fromRow, fromColumn);
+        Position to = new Position(toRow, toColumn);
         if (!getCell(to).isEmpty())
             getCell(to).removePiece();
         getCell(to).setPiece(getPiece(from));
@@ -94,18 +99,18 @@ public class ChessBoard {
         return true;
     }
 
-    private void updateIsKingDead(Position positionBeingMovedTo) {
-        if (getPiece(positionBeingMovedTo).getClass() == King.class) {
+    private void updateIsKingDead(int row, int column) {
+        if (getPiece(new Position(row, column)).getClass() == King.class) {
             _isKingDead = true;
         }
     }
 
-    private void updatePawnStatus(Position position) {
-        if (getPiece(position).getClass() == Pawn.class) {
-            Pawn pawn = (Pawn)getPiece(position);
-            int forwardRow = position.getRow()+ ((pawn.getColor() == Color.BLACK) ? 1 : -1);
-            Position forwardLeft = new Position(forwardRow, position.getColumn() - 1);
-            Position forwardRight = new Position(forwardRow, position.getColumn() + 1);
+    private void updatePawnStatus(int row, int column) {
+        if (getPiece(new Position(row, column)).getClass() == Pawn.class) {
+            Pawn pawn = (Pawn)getPiece(new Position(row, column));
+            int forwardRow = row + ((pawn.getColor() == Color.BLACK) ? 1 : -1);
+            Position forwardLeft = new Position(forwardRow, column - 1);
+            Position forwardRight = new Position(forwardRow, column + 1);
             if ((!getCell(forwardLeft).isEmpty() && getPiece(forwardLeft).getColor() != pawn.getColor())
                     || (!getCell(forwardRight).isEmpty() && getPiece(forwardRight).getColor() != pawn.getColor())) {
                 pawn.setHasOpponentPieceAtForwardDiagonal(true);

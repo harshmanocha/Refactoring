@@ -90,6 +90,8 @@ public class ChessBoard {
         return cell.isEmpty() ? null : cell.getPiece();
     }
 
+    //Fixed long parameter list code smell: Pass the object itself instead of passing its data.
+    // (isValidMove, movePiece, updateIsKingDead, updatePawnStatus)
     public boolean isValidMove(Position from, Position to) {
         return !isEmpty(from)
                 && getPiece(from).getColor() != getPiece(to).getColor()

@@ -44,7 +44,7 @@ public class GameEngine {
             System.out.println("Invalid Move");
             return false;
         }
-        if (_chessBoard.movePiece(from, to)) {
+        if (_chessBoard.movePiece(from.getRow(), from.getColumn(), to.getRow(), to.getColumn())) {
             System.out.println("Piece moved for Player : " + _currentPlayer);
             _chessBoard.printBoard();
             if (_chessBoard.isKingDead()) {
@@ -59,7 +59,7 @@ public class GameEngine {
 
     private boolean isValidMove(Position from, Position to) {
         return !(!_chessBoard.isEmpty(from) && _chessBoard.getPiece(from).getColor() != _currentPlayer.getCurrentColor())
-                && _chessBoard.isValidMove(from, to);
+                && _chessBoard.isValidMove(from.getRow(), from.getColumn(), to.getRow(), to.getColumn());
     }
 
 }
