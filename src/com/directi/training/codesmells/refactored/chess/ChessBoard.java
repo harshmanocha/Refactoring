@@ -3,6 +3,7 @@ package com.directi.training.codesmells.refactored.chess;
 import com.directi.training.codesmells.refactored.pieces.*;
 
 public class ChessBoard {
+    // Fixes magic number code smell. Although this const is not supposed to be changed, but this avoids a typo
     private static final int BOARD_SIZE = 8;
     private final Cell[][] _board;
     private boolean _isKingDead;

@@ -3,19 +3,18 @@ package com.directi.training.codesmells.smelly.chess;
 import com.directi.training.codesmells.smelly.pieces.*;
 
 public class ChessBoard {
-    private static final int BOARD_SIZE = 8;
     private final Cell[][] _board;
     private boolean _isKingDead;
 
     public ChessBoard() {
-        _board = new Cell[BOARD_SIZE][BOARD_SIZE];
+        _board = new Cell[8][8];
         initBoard();
         resetBoard();
     }
 
     private void initBoard() {
-        for (int row = 0; row < BOARD_SIZE; row++) {
-            for (int column = 0; column < BOARD_SIZE; column++) {
+        for (int row = 0; row < 8; row++) {
+            for (int column = 0; column < 8; column++) {
                 Color color = ((row + column) % 2 == 0) ? Color.WHITE : Color.BLACK;
                 _board[row][column] = new Cell(color);
             }
@@ -23,28 +22,28 @@ public class ChessBoard {
     }
 
     public void resetBoard() {
-        for (int column = 0; column < BOARD_SIZE; column++) {
-            if (column == 0 || column == BOARD_SIZE - 1) {
-                _board[BOARD_SIZE - 1][column].setPiece(new Rook(Color.WHITE));
-            } else if (column == 1 || column == BOARD_SIZE - 2) {
-                _board[BOARD_SIZE - 1][column].setPiece(new Knight(Color.WHITE));
-            } else if (column == 2 || column == BOARD_SIZE - 3) {
-                _board[BOARD_SIZE - 1][column].setPiece(new Bishop(Color.WHITE));
+        for (int column = 0; column < 8; column++) {
+            if (column == 0 || column == 7) {
+                _board[7][column].setPiece(new Rook(Color.WHITE));
+            } else if (column == 1 || column == 8 - 2) {
+                _board[7][column].setPiece(new Knight(Color.WHITE));
+            } else if (column == 2 || column == 8 - 3) {
+                _board[7][column].setPiece(new Bishop(Color.WHITE));
             } else if (column == 3) {
-                _board[BOARD_SIZE - 1][column].setPiece(new King(Color.WHITE));
+                _board[7][column].setPiece(new King(Color.WHITE));
             } else if (column == 4) {
-                _board[BOARD_SIZE - 1][column].setPiece(new Queen(Color.WHITE));
+                _board[7][column].setPiece(new Queen(Color.WHITE));
             }
         }
-        for (int column = 0; column < BOARD_SIZE; column++)
-            _board[BOARD_SIZE - 2][column].setPiece(new Pawn(Color.WHITE));
+        for (int column = 0; column < 8; column++)
+            _board[6][column].setPiece(new Pawn(Color.WHITE));
 
-        for (int column = 0; column < BOARD_SIZE; column++) {
-            if (column == 0 || column == BOARD_SIZE - 1) {
+        for (int column = 0; column < 8; column++) {
+            if (column == 0 || column == 8 - 1) {
                 _board[0][column].setPiece(new Rook(Color.BLACK));
-            } else if (column == 1 || column == BOARD_SIZE - 2) {
+            } else if (column == 1 || column == 8 - 2) {
                 _board[0][column].setPiece(new Knight(Color.BLACK));
-            } else if (column == 2 || column == BOARD_SIZE - 3) {
+            } else if (column == 2 || column == 8 - 3) {
                 _board[0][column].setPiece(new Bishop(Color.BLACK));
             } else if (column == 3) {
                 _board[0][column].setPiece(new King(Color.BLACK));
@@ -52,7 +51,7 @@ public class ChessBoard {
                 _board[0][column].setPiece(new Queen(Color.BLACK));
             }
         }
-        for (int column = 0; column < BOARD_SIZE; column++)
+        for (int column = 0; column < 8; column++)
             _board[1][column].setPiece(new Pawn(Color.BLACK));
 
         _isKingDead = false;
@@ -122,8 +121,8 @@ public class ChessBoard {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int row = 0; row < BOARD_SIZE; row++) {
-            for (int column = 0; column < BOARD_SIZE; column++) {
+        for (int row = 0; row < 8; row++) {
+            for (int column = 0; column < 8; column++) {
                 stringBuilder.append(" ")
                              .append(_board[row][column])
                              .append(" ");
