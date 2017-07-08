@@ -23,52 +23,39 @@ public class ChessBoard {
     }
 
     public void resetBoard() {
-        placePieces(Color.WHITE);
-        placePieces(Color.BLACK);
-        _isKingDead = false;
-    }
-
-    private void placePieces(Color color) {
-        int pawnsRow, otherPiecesRow;
-        switch (color) {
-            case WHITE:
-                pawnsRow = BOARD_SIZE - 2;
-                otherPiecesRow = BOARD_SIZE - 1;
-                break;
-            case BLACK:
-                pawnsRow = 1;
-                otherPiecesRow = 0;
-                break;
-            default:
-                System.err.println("Unexpected color passed to placePieces.");
-                return;
-        }
-        placeOtherPieces(otherPiecesRow, color);
-        placePawns(pawnsRow, color);
-    }
-
-    private void placePawns(int row, Color color) {
-        for (int i = 0; i < BOARD_SIZE; i++)
-            _board[row][i].setPiece(new Pawn(color));
-    }
-
-    private void placeOtherPieces(int row, Color color) {
-        assert BOARD_SIZE == 8;
         for (int column = 0; column < BOARD_SIZE; column++) {
-            Piece piece = null;
             if (column == 0 || column == BOARD_SIZE - 1) {
-                piece = new Rook(color);
+                _board[0][column].setPiece(new Rook(Color.WHITE));
             } else if (column == 1 || column == BOARD_SIZE -2) {
-                piece = new Knight(color);
+                _board[0][column].setPiece(new Knight(Color.WHITE));
             } else if (column == 2 || column == BOARD_SIZE - 3) {
-                piece = new Bishop(color);
+                _board[0][column].setPiece(new Bishop(Color.WHITE));
             } else if (column == 3) {
-                piece = new King(color);
+                _board[0][column].setPiece(new King(Color.WHITE));
             } else if (column == 4) {
-                piece = new Queen(color);
+                _board[0][column].setPiece(new Queen(Color.WHITE));
             }
-            _board[row][column].setPiece(piece);
         }
+        for (int column = 0; column < BOARD_SIZE; column++)
+            _board[BOARD_SIZE - 2][column].setPiece(new Pawn(Color.WHITE));
+
+        for (int column = 0; column < BOARD_SIZE; column++) {
+            if (column == 0 || column == BOARD_SIZE - 1) {
+                _board[0][column].setPiece(new Rook(Color.BLACK));
+            } else if (column == 1 || column == BOARD_SIZE -2) {
+                _board[0][column].setPiece(new Knight(Color.BLACK));
+            } else if (column == 2 || column == BOARD_SIZE - 3) {
+                _board[0][column].setPiece(new Bishop(Color.BLACK));
+            } else if (column == 3) {
+                _board[0][column].setPiece(new King(Color.BLACK));
+            } else if (column == 4) {
+                _board[0][column].setPiece(new Queen(Color.BLACK));
+            }
+        }
+        for (int column = 0; column < BOARD_SIZE; column++)
+            _board[1][column].setPiece(new Pawn(Color.BLACK));
+
+        _isKingDead = false;
     }
 
     public void printBoard() {
