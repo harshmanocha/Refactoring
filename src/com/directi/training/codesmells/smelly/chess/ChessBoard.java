@@ -99,13 +99,13 @@ public class ChessBoard {
     }
 
     private void updateIsKingDead(int row, int column) {
-        if (getPiece(new Position(row, column)).getClass() == King.class) {
+        if (getPiece(new Position(row, column)) instanceof King) {
             _isKingDead = true;
         }
     }
 
     private void updatePawnStatus(int row, int column) {
-        if (getPiece(new Position(row, column)).getClass() == Pawn.class) {
+        if (getPiece(new Position(row, column)) instanceof Pawn) {
             Pawn pawn = (Pawn)getPiece(new Position(row, column));
             int forwardRow = row + ((pawn.getColor() == Color.BLACK) ? 1 : -1);
             Position forwardLeft = new Position(forwardRow, column - 1);
