@@ -11,7 +11,7 @@ public class Bishop extends Piece {
 
     @Override
     public boolean isValidMove(Position from, Position to) {
-        return Move.isDiagonalMove(from, to);
+        return Math.abs(from.getRow() - to.getRow()) == Math.abs(from.getColumn() - to.getColumn());
     }
 
     @Override

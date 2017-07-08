@@ -9,7 +9,7 @@ public class Rook extends Piece {
     }
 
     public boolean isValidMove(Position from, Position to) {
-        return Move.isHorizontalOrVerticalMove(from, to);
+        return from.getRow() == to.getRow() || from.getColumn() == to.getColumn();
     }
 
     @Override

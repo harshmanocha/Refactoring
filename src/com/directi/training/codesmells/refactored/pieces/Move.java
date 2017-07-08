@@ -2,6 +2,7 @@ package com.directi.training.codesmells.refactored.pieces;
 
 import com.directi.training.codesmells.refactored.chess.Position;
 
+// Code Smell solved: Duplicated code across classes
 public class Move {
     public static boolean isDiagonalMove(Position from, Position to) {
         return Math.abs(from.getRow() - to.getRow()) == Math.abs(from.getColumn() - to.getColumn());
