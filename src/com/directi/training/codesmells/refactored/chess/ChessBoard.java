@@ -91,12 +91,13 @@ public class ChessBoard {
     }
 
     public boolean isValidMove(Position from, Position to) {
-        return !isEmpty(from) && getPiece(from).getColor() != getPiece(to).getColor();
+        return !isEmpty(from)
+                && getPiece(from).getColor() != getPiece(to).getColor()
+                && getPiece(from).isValidMove(from, to);
     }
 
     public boolean movePiece(Position from, Position to) {
-        Piece startPiece = getCell(from).getPiece();
-        if (!isValidMove(from, to) || !startPiece.isValidMove(from, to)) {
+        if (!isValidMove(from, to)) {
             System.out.println("Invalid Move!");
             return false;
         }
@@ -104,7 +105,7 @@ public class ChessBoard {
         updatePawnStatus(to);
         if (!getCell(to).isEmpty())
             getCell(to).removePiece();
-        getCell(to).setPiece(startPiece);
+        getCell(to).setPiece(getPiece(from));
         getCell(from).removePiece();
         return true;
     }
