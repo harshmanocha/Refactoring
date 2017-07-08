@@ -7,6 +7,7 @@ public class Player {
 
     public Player(String name) {
         _name = name;
+        _gamesWon = 0;
     }
 
     public String getName() {
