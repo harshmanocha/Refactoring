@@ -78,7 +78,7 @@ public class ChessBoard {
     }
 
     public boolean isEmpty(Position position) {
-        return _board[position.getRow()][position.getColumn()].isEmpty();
+        return getCell(position).isEmpty();
     }
 
     private Cell getCell(Position position) {
@@ -121,7 +121,7 @@ public class ChessBoard {
     private void updatePawnStatus(Position position) {
         if (getPiece(position).getClass() == Pawn.class) {
             Pawn pawn = (Pawn)getPiece(position);
-            int forwardRow = position.getRow()+ ((pawn.getColor() == Color.BLACK) ? 1 : -1);
+            int forwardRow = position.getRow() + ((pawn.getColor() == Color.BLACK) ? 1 : -1);
             Position forwardLeft = new Position(forwardRow, position.getColumn() - 1);
             Position forwardRight = new Position(forwardRow, position.getColumn() + 1);
             if ((!getCell(forwardLeft).isEmpty() && getPiece(forwardLeft).getColor() != pawn.getColor())

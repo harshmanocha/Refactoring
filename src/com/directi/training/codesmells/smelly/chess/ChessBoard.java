@@ -1,7 +1,6 @@
 package com.directi.training.codesmells.smelly.chess;
 
 import com.directi.training.codesmells.smelly.pieces.*;
-import javafx.geometry.Pos;
 
 public class ChessBoard {
     private final Cell[][] _board;
@@ -26,9 +25,9 @@ public class ChessBoard {
         for (int column = 0; column < 8; column++) {
             if (column == 0 || column == 7) {
                 _board[7][column].setPiece(new Rook(Color.WHITE));
-            } else if (column == 1 || column == 8 - 2) {
+            } else if (column == 1 || column == 6) {
                 _board[7][column].setPiece(new Knight(Color.WHITE));
-            } else if (column == 2 || column == 8 - 3) {
+            } else if (column == 2 || column == 5) {
                 _board[7][column].setPiece(new Bishop(Color.WHITE));
             } else if (column == 3) {
                 _board[7][column].setPiece(new King(Color.WHITE));
@@ -40,11 +39,11 @@ public class ChessBoard {
             _board[6][column].setPiece(new Pawn(Color.WHITE));
 
         for (int column = 0; column < 8; column++) {
-            if (column == 0 || column == 8 - 1) {
+            if (column == 0 || column == 7) {
                 _board[0][column].setPiece(new Rook(Color.BLACK));
-            } else if (column == 1 || column == 8 - 2) {
+            } else if (column == 1 || column == 6) {
                 _board[0][column].setPiece(new Knight(Color.BLACK));
-            } else if (column == 2 || column == 8 - 3) {
+            } else if (column == 2 || column == 5) {
                 _board[0][column].setPiece(new Bishop(Color.BLACK));
             } else if (column == 3) {
                 _board[0][column].setPiece(new King(Color.BLACK));
@@ -63,7 +62,7 @@ public class ChessBoard {
     }
 
     public boolean isEmpty(Position position) {
-        return _board[position.getRow()][position.getColumn()].isEmpty();
+        return getCell(position).isEmpty();
     }
 
     private Cell getCell(Position position) {
