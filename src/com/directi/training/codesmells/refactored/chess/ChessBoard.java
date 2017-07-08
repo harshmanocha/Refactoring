@@ -59,7 +59,7 @@ public class ChessBoard {
             Piece piece = null;
             if (column == 0 || column == BOARD_SIZE - 1) {
                 piece = new Rook(color);
-            } else if (column == 1 || column == BOARD_SIZE -2) {
+            } else if (column == 1 || column == BOARD_SIZE - 2) {
                 piece = new Knight(color);
             } else if (column == 2 || column == BOARD_SIZE - 3) {
                 piece = new Bishop(color);

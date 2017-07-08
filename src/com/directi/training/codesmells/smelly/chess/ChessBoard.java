@@ -26,7 +26,7 @@ public class ChessBoard {
         for (int column = 0; column < BOARD_SIZE; column++) {
             if (column == 0 || column == BOARD_SIZE - 1) {
                 _board[0][column].setPiece(new Rook(Color.WHITE));
-            } else if (column == 1 || column == BOARD_SIZE -2) {
+            } else if (column == 1 || column == BOARD_SIZE - 2) {
                 _board[0][column].setPiece(new Knight(Color.WHITE));
             } else if (column == 2 || column == BOARD_SIZE - 3) {
                 _board[0][column].setPiece(new Bishop(Color.WHITE));
@@ -42,7 +42,7 @@ public class ChessBoard {
         for (int column = 0; column < BOARD_SIZE; column++) {
             if (column == 0 || column == BOARD_SIZE - 1) {
                 _board[0][column].setPiece(new Rook(Color.BLACK));
-            } else if (column == 1 || column == BOARD_SIZE -2) {
+            } else if (column == 1 || column == BOARD_SIZE - 2) {
                 _board[0][column].setPiece(new Knight(Color.BLACK));
             } else if (column == 2 || column == BOARD_SIZE - 3) {
                 _board[0][column].setPiece(new Bishop(Color.BLACK));
