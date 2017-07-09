@@ -25,8 +25,15 @@ public class ChessBoard {
         return _board;
     }
 
+    private boolean isPositionOutOfBounds(Position position) {
+        return (position.getRow() < 0
+                || position.getRow() >= 8
+                || position.getColumn() < 0
+                || position.getColumn() >= 8);
+    }
+
     public boolean isEmpty(Position position) {
-        return getCell(position).isEmpty();
+        return !isPositionOutOfBounds(position) && getCell(position).isEmpty();
     }
 
     private Cell getCell(Position position) {
@@ -34,11 +41,14 @@ public class ChessBoard {
     }
 
     public Piece getPiece(Position position) {
-        Cell cell = getCell(position);
-        return cell.isEmpty() ? null : cell.getPiece();
+        return (isPositionOutOfBounds(position) || getCell(position).isEmpty())
+                ? null
+                : getCell(position).getPiece();
     }
 
     public String getPlayerName(Position position) {
+        if (isPositionOutOfBounds(position))
+            return null;
         Color color = getCell(position).getPiece().getColor();
         if (color == player1.getCurrentColor()) {
             return player1.getName();
@@ -57,7 +67,8 @@ public class ChessBoard {
     public boolean isValidMove(int fromRow, int fromColumn, int toRow, int toColumn) {
         Position from = new Position(fromRow, fromColumn);
         Position to = new Position(toRow, toColumn);
-        return !isEmpty(from)
+        return !(isPositionOutOfBounds(from) || isPositionOutOfBounds(to))
+                && !isEmpty(from)
                 && (isEmpty(to) || getPiece(from).getColor() != getPiece(to).getColor())
                 && getPiece(from).isValidMove(from, to);
     }

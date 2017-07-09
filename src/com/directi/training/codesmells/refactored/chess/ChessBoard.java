@@ -73,8 +73,15 @@ public class ChessBoard {
         }
     }
 
+    private boolean isPositionOutOfBounds(Position position) {
+        return (position.getRow() < 0
+                || position.getRow() >= 8
+                || position.getColumn() < 0
+                || position.getColumn() >= 8);
+    }
+
     public boolean isEmpty(Position position) {
-        return getCell(position).isEmpty();
+        return !isPositionOutOfBounds(position) && getCell(position).isEmpty();
     }
 
     private Cell getCell(Position position) {
@@ -84,14 +91,16 @@ public class ChessBoard {
     //Dead-Code Code Smell fixed by removing getPlayerName and printMove methods (and also toString of Position)
 
     public Piece getPiece(Position position) {
-        Cell cell = getCell(position);
-        return cell.isEmpty() ? null : cell.getPiece();
+        return (isPositionOutOfBounds(position) || getCell(position).isEmpty())
+                ? null
+                : getCell(position).getPiece();
     }
 
     //Fixed long parameter list code smell: Pass the object itself instead of passing its data.
     // (isValidMove, movePiece, updateIsKingDead, updatePawnStatus)
     public boolean isValidMove(Position from, Position to) {
-        return !isEmpty(from)
+        return !(isPositionOutOfBounds(from) || isPositionOutOfBounds(to))
+                && !isEmpty(from)
                 && (isEmpty(to) || getPiece(from).getColor() != getPiece(to).getColor())
                 && getPiece(from).isValidMove(from, to);
     }
