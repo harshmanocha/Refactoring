@@ -81,7 +81,7 @@ public class ChessBoard {
     }
 
     public boolean isEmpty(Position position) {
-        return !isPositionOutOfBounds(position) && getCell(position).isEmpty();
+        return isPositionOutOfBounds(position) || getCell(position).isEmpty();
     }
 
     private Cell getCell(Position position) {
