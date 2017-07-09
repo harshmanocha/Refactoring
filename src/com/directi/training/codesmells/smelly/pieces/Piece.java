@@ -4,8 +4,8 @@ import com.directi.training.codesmells.smelly.chess.Color;
 import com.directi.training.codesmells.smelly.chess.Position;
 
 public abstract class Piece {
-    private Color _color;
-    private char _type;
+    public Color _color;
+    public char _type;
 
     public Piece(Color color, char type) {
         _color = color;
