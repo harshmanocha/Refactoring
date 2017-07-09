@@ -82,7 +82,7 @@ public class GameEngine {
     }
 
     private boolean isValidMove(Position from, Position to) {
-        return !(!_chessBoard.isEmpty(from) && _chessBoard.getPiece(from).getColor() != _currentPlayer.getCurrentColor())
+        return (!_chessBoard.isEmpty(from) && _chessBoard.getPiece(from).getColor() == _currentPlayer.getCurrentColor())
                 && _chessBoard.isValidMove(from, to);
     }
 

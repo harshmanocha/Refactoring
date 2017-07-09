@@ -92,7 +92,7 @@ public class ChessBoard {
     // (isValidMove, movePiece, updateIsKingDead, updatePawnStatus)
     public boolean isValidMove(Position from, Position to) {
         return !isEmpty(from)
-                && getPiece(from).getColor() != getPiece(to).getColor()
+                && (isEmpty(to) || getPiece(from).getColor() != getPiece(to).getColor())
                 && getPiece(from).isValidMove(from, to);
     }
 

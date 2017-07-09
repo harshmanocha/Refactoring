@@ -58,7 +58,7 @@ public class ChessBoard {
         Position from = new Position(fromRow, fromColumn);
         Position to = new Position(toRow, toColumn);
         return !isEmpty(from)
-                && getPiece(from).getColor() != getPiece(to).getColor()
+                && (isEmpty(to) || getPiece(from).getColor() != getPiece(to).getColor())
                 && getPiece(from).isValidMove(from, to);
     }
 

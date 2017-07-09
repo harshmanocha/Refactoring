@@ -131,8 +131,7 @@ public class GameEngine {
     }
 
     private boolean isValidMove(Move move) {
-        return !(!_chessBoard.isEmpty(move.getFrom()) && _chessBoard.getPiece(move.getFrom()).getColor() != _currentPlayer.getCurrentColor())
-                && _chessBoard.isValidMove(move.getFrom().getRow(), move.getFrom().getColumn(), move.getFrom().getRow(), move.getTo().getColumn());
+        return (!_chessBoard.isEmpty(move.getFrom()) && _chessBoard.getPiece(move.getFrom()).getColor() == _currentPlayer.getCurrentColor())
+                && _chessBoard.isValidMove(move.getFrom().getRow(), move.getFrom().getColumn(), move.getTo().getRow(), move.getTo().getColumn());
     }
-
 }
