@@ -28,9 +28,8 @@ public class Cell {
 
     @Override
     public String toString() {
-        String cellColor = _color == Color.BLACK ? "B" : "W";
         return _piece == null
-                ? ("." + cellColor + ".")
-                : (_piece.getColor().toString() + _piece.toString() + cellColor);
+                ? ("." + _color + ".")
+                : (_piece.getColor().toString() + _color + _piece.toString());
     }
 }
