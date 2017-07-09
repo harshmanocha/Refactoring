@@ -5,6 +5,7 @@ import com.directi.training.codesmells.smelly.pieces.*;
 public class ChessBoard {
     private final Cell[][] _board;
     public boolean _isKingDead;
+    public Player player1, player2;
 
     public ChessBoard() {
         _board = new Cell[8][8];
@@ -35,6 +36,22 @@ public class ChessBoard {
     public Piece getPiece(Position position) {
         Cell cell = getCell(position);
         return cell.isEmpty() ? null : cell.getPiece();
+    }
+
+    public String getPlayerName(Position position) {
+        Color color = getCell(position).getPiece().getColor();
+        if (color == player1.getCurrentColor()) {
+            return player1.getName();
+        } else {
+            return player2.getName();
+        }
+    }
+
+    private void printMove(Position from, Position to) {
+        System.out.println(getPlayerName(from) + " moved " + getPiece(from) + " from " + from + " to " + to);
+        if (getPiece(from).getColor() != getPiece(to).getColor()) {
+            System.out.println("And has captured " + getPiece(to) + " of " + getPlayerName(to));
+        }
     }
 
     public boolean isValidMove(int fromRow, int fromColumn, int toRow, int toColumn) {

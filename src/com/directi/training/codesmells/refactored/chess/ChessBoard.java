@@ -81,6 +81,8 @@ public class ChessBoard {
         return _board[position.getRow()][position.getColumn()];
     }
 
+    //Dead-Code Code Smell fixed by removing getPlayerName and printMove methods (and also toString of Position)
+
     public Piece getPiece(Position position) {
         Cell cell = getCell(position);
         return cell.isEmpty() ? null : cell.getPiece();
