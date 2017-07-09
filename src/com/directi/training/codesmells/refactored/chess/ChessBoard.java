@@ -88,7 +88,8 @@ public class ChessBoard {
         return _board[position.getRow()][position.getColumn()];
     }
 
-    //Dead-Code Code Smell fixed by removing getPlayerName and printMove methods (and also toString of Position)
+    //Dead-Code Code Smell fixed by removing getPlayerName and printMove methods (and also toString of Position),
+    // as well as player 1 and player 2 fields.
 
     public Piece getPiece(Position position) {
         return (isPositionOutOfBounds(position) || getCell(position).isEmpty())
