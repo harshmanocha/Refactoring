@@ -73,7 +73,6 @@ public class GameEngine {
         if (_chessBoard.isKingDead()) {
             endGame();
             initGame();
-            return true;
         } else
             _currentPlayer = getOtherPlayer();
     }
