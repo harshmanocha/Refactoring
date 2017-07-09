@@ -39,6 +39,7 @@ public class GameEngine {
         return _player1 == _currentPlayer ? _player2 : _player1;
     }
 
+    //Fixed Lazy-class Code Smell by removing Move class
     public boolean makeMove(Position from, Position to) {
         if (!isValidMove(from, to)) {
             System.out.println("Invalid Move");

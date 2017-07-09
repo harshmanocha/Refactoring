@@ -77,12 +77,12 @@ public class GameEngine {
         return _player1 == _currentPlayer ? _player2 : _player1;
     }
 
-    public boolean makeMove(Position from, Position to) {
-        if (!isValidMove(from, to)) {
+    public boolean makeMove(Move move) {
+        if (!isValidMove(move)) {
             System.out.println("Invalid Move");
             return false;
         }
-        if (_chessBoard.movePiece(from.getRow(), from.getColumn(), to.getRow(), to.getColumn())) {
+        if (_chessBoard.movePiece(move.getFrom().getRow(), move.getFrom().getColumn(), move.getTo().getRow(), move.getTo().getColumn())) {
             System.out.println("Piece moved for Player : " + _currentPlayer);
             System.out.println(_chessBoard);
             if (_chessBoard.isKingDead()) {
@@ -95,9 +95,9 @@ public class GameEngine {
         return false;
     }
 
-    private boolean isValidMove(Position from, Position to) {
-        return !(!_chessBoard.isEmpty(from) && _chessBoard.getPiece(from).getColor() != _currentPlayer.getCurrentColor())
-                && _chessBoard.isValidMove(from.getRow(), from.getColumn(), to.getRow(), to.getColumn());
+    private boolean isValidMove(Move move) {
+        return !(!_chessBoard.isEmpty(move.getFrom()) && _chessBoard.getPiece(move.getFrom()).getColor() != _currentPlayer.getCurrentColor())
+                && _chessBoard.isValidMove(move.getFrom().getRow(), move.getFrom().getColumn(), move.getFrom().getRow(), move.getTo().getColumn());
     }
 
 }
