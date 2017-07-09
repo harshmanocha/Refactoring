@@ -8,7 +8,7 @@ public class Pawn extends Piece {
     private boolean _hasOpponentPieceAtForwardDiagonal;
 
     public Pawn(Color color) {
-        super(color);
+        super(color, 'p');
         _isAtInitialPosition = true;
     }
 

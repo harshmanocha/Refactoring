@@ -14,5 +14,6 @@ public abstract class Piece {
         return _color;
     }
 
+    //Fixed Switch-case code smell through polymorphism. Note that type field has also been removed.
     public abstract boolean isValidMove(Position from, Position to);
 }
