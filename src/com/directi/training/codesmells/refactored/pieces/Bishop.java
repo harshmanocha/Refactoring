@@ -3,6 +3,7 @@ package com.directi.training.codesmells.refactored.pieces;
 import com.directi.training.codesmells.refactored.chess.Position;
 import com.directi.training.codesmells.refactored.chess.Color;
 
+//Fixed Collapsing Hierarchy (another instance of lazy-class)
 public class Bishop extends Piece {
 
     public Bishop(Color color) {

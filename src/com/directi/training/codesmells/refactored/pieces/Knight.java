@@ -3,6 +3,7 @@ package com.directi.training.codesmells.refactored.pieces;
 import com.directi.training.codesmells.refactored.chess.Color;
 import com.directi.training.codesmells.refactored.chess.Position;
 
+//Fixed Collapsing Hierarchy (another instance of lazy-class)
 public class Knight extends Piece {
     public Knight(Color color) {
         super(color);
