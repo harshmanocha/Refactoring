@@ -4,12 +4,11 @@ import com.directi.training.codesmells.smelly.pieces.*;
 
 public class ChessBoard {
     private final Cell[][] _board;
-    private boolean _isKingDead;
+    public boolean _isKingDead;
 
     public ChessBoard() {
         _board = new Cell[8][8];
         initBoard();
-        resetBoard();
     }
 
     private void initBoard() {
@@ -21,44 +20,8 @@ public class ChessBoard {
         }
     }
 
-    public void resetBoard() {
-        for (int column = 0; column < 8; column++) {
-            if (column == 0 || column == 7) {
-                _board[7][column].setPiece(new Rook(Color.WHITE));
-            } else if (column == 1 || column == 6) {
-                _board[7][column].setPiece(new Knight(Color.WHITE));
-            } else if (column == 2 || column == 5) {
-                _board[7][column].setPiece(new Bishop(Color.WHITE));
-            } else if (column == 3) {
-                _board[7][column].setPiece(new King(Color.WHITE));
-            } else if (column == 4) {
-                _board[7][column].setPiece(new Queen(Color.WHITE));
-            }
-        }
-        for (int column = 0; column < 8; column++)
-            _board[6][column].setPiece(new Pawn(Color.WHITE));
-
-        for (int column = 0; column < 8; column++) {
-            if (column == 0 || column == 7) {
-                _board[0][column].setPiece(new Rook(Color.BLACK));
-            } else if (column == 1 || column == 6) {
-                _board[0][column].setPiece(new Knight(Color.BLACK));
-            } else if (column == 2 || column == 5) {
-                _board[0][column].setPiece(new Bishop(Color.BLACK));
-            } else if (column == 3) {
-                _board[0][column].setPiece(new King(Color.BLACK));
-            } else if (column == 4) {
-                _board[0][column].setPiece(new Queen(Color.BLACK));
-            }
-        }
-        for (int column = 0; column < 8; column++)
-            _board[1][column].setPiece(new Pawn(Color.BLACK));
-
-        _isKingDead = false;
-    }
-
-    public void printBoard() {
-        System.out.println(this.toString());
+    public Cell[][] getBoard() {
+        return _board;
     }
 
     public boolean isEmpty(Position position) {

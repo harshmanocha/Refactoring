@@ -6,12 +6,12 @@ public class ChessBoard {
     // Fixes magic number code smell. Although this const is not supposed to be changed, but this avoids a typo
     private static final int BOARD_SIZE = 8;
     private final Cell[][] _board;
-    private boolean _isKingDead;
+    private boolean _isKingDead; //On fixing feature envy code smell, this should be made private and getBoard method be removed
 
     public ChessBoard() {
         _board = new Cell[BOARD_SIZE][BOARD_SIZE];
         initBoard();
-        resetBoard();
+        resetBoard(); // Added later
     }
 
     private void initBoard() {
@@ -71,10 +71,6 @@ public class ChessBoard {
             }
             _board[row][column].setPiece(piece);
         }
-    }
-
-    public void printBoard() {
-        System.out.println(this.toString());
     }
 
     public boolean isEmpty(Position position) {

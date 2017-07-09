@@ -1,5 +1,7 @@
 package com.directi.training.codesmells.smelly.chess;
 
+import com.directi.training.codesmells.smelly.pieces.*;
+
 public class GameEngine {
     private final ChessBoard _chessBoard;
     private Player _player1, _player2;
@@ -23,8 +25,44 @@ public class GameEngine {
         System.out.println("Player " + _player1.getName() + " has Color " + _player1.getCurrentColor());
         System.out.println("Player " + _player2.getName() + " has Color " + _player2.getCurrentColor());
         System.out.println("");
-        _chessBoard.resetBoard();
-        _chessBoard.printBoard();
+        resetBoard();
+        System.out.println(_chessBoard);
+    }
+
+    public void resetBoard() {
+        for (int column = 0; column < 8; column++) {
+            if (column == 0 || column == 7) {
+                _chessBoard.getBoard()[7][column].setPiece(new Rook(Color.WHITE));
+            } else if (column == 1 || column == 6) {
+                _chessBoard.getBoard()[7][column].setPiece(new Knight(Color.WHITE));
+            } else if (column == 2 || column == 5) {
+                _chessBoard.getBoard()[7][column].setPiece(new Bishop(Color.WHITE));
+            } else if (column == 3) {
+                _chessBoard.getBoard()[7][column].setPiece(new King(Color.WHITE));
+            } else if (column == 4) {
+                _chessBoard.getBoard()[7][column].setPiece(new Queen(Color.WHITE));
+            }
+        }
+        for (int column = 0; column < 8; column++)
+            _chessBoard.getBoard()[6][column].setPiece(new Pawn(Color.WHITE));
+
+        for (int column = 0; column < 8; column++) {
+            if (column == 0 || column == 7) {
+                _chessBoard.getBoard()[0][column].setPiece(new Rook(Color.BLACK));
+            } else if (column == 1 || column == 6) {
+                _chessBoard.getBoard()[0][column].setPiece(new Knight(Color.BLACK));
+            } else if (column == 2 || column == 5) {
+                _chessBoard.getBoard()[0][column].setPiece(new Bishop(Color.BLACK));
+            } else if (column == 3) {
+                _chessBoard.getBoard()[0][column].setPiece(new King(Color.BLACK));
+            } else if (column == 4) {
+                _chessBoard.getBoard()[0][column].setPiece(new Queen(Color.BLACK));
+            }
+        }
+        for (int column = 0; column < 8; column++)
+            _chessBoard.getBoard()[1][column].setPiece(new Pawn(Color.BLACK));
+
+        _chessBoard._isKingDead = false;
     }
 
     private void endGame() {
@@ -46,7 +84,7 @@ public class GameEngine {
         }
         if (_chessBoard.movePiece(from.getRow(), from.getColumn(), to.getRow(), to.getColumn())) {
             System.out.println("Piece moved for Player : " + _currentPlayer);
-            _chessBoard.printBoard();
+            System.out.println(_chessBoard);
             if (_chessBoard.isKingDead()) {
                 endGame();
                 return true;

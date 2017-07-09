@@ -23,8 +23,8 @@ public class GameEngine {
         System.out.println("Player " + _player1.getName() + " has Color " + _player1.getCurrentColor());
         System.out.println("Player " + _player2.getName() + " has Color " + _player2.getCurrentColor());
         System.out.println("");
-        _chessBoard.resetBoard();
-        _chessBoard.printBoard();
+        _chessBoard.resetBoard(); //Fixes Feature Envy Code Smell
+        System.out.println();
     }
 
     private void endGame() {
@@ -46,7 +46,7 @@ public class GameEngine {
         }
         if (_chessBoard.movePiece(from, to)) {
             System.out.println("Piece moved for Player : " + _currentPlayer);
-            _chessBoard.printBoard();
+            System.out.println(_chessBoard);
             if (_chessBoard.isKingDead()) {
                 endGame();
                 return true;
