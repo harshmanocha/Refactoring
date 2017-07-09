@@ -108,6 +108,8 @@ public class ChessBoard {
                 && hasNoPieceInPath(from, to);
     }
 
+    //Fixed another instance of long method (also an example of switch-case)
+    // by extracting out code for knight in a separate method.
     private boolean hasNoPieceInPath(Position from, Position to) {
         if (getPiece(from) instanceof Knight)
             return hasNoPieceInPathOfKnight(from, to);

@@ -4,7 +4,7 @@ Code Smells and refactoring the code to fix the problems.
 Solution is also included.
 
 Code Smells covered:
-1. Long method
+1. Long method (2 instances)
 2. Duplicate code (within class/method)
 3. Duplicate code across classes
 4. Magic Number
