@@ -129,15 +129,13 @@ public class ChessBoard {
     private void updatePawnStatus(Position position) {
         if (getPiece(position) instanceof Pawn) {
             Pawn pawn = (Pawn)getPiece(position);
-            int forwardRow = position.getRow() + ((pawn.getColor() == Color.BLACK) ? 1 : -1);
-            Position forwardLeft = new Position(forwardRow, position.getColumn() - 1);
-            Position forwardRight = new Position(forwardRow, position.getColumn() + 1);
-            if ((!getCell(forwardLeft).isEmpty() && getPiece(forwardLeft).getColor() != pawn.getColor())
-                    || (!getCell(forwardRight).isEmpty() && getPiece(forwardRight).getColor() != pawn.getColor())) {
-                pawn.setHasOpponentPieceAtForwardDiagonal(true);
-            } else {
-                pawn.setHasOpponentPieceAtForwardDiagonal(false);
-            }
+            Color pawnColor = pawn.getColor();
+            int forwardRow = position.getRow() + ((pawnColor == Color.BLACK) ? 1 : -1);
+            Position forwardLeft = new Position(forwardRow, position.getColumn() + (pawnColor == Color.WHITE ? -1 : 1));
+            Position forwardRight = new Position(forwardRow, position.getColumn() + (pawnColor == Color.WHITE ? 1 : -1));
+
+            pawn.setHasOpponentPieceAtForwardLeft((!isEmpty(forwardLeft) && getPiece(forwardLeft).getColor() != pawnColor));
+            pawn.setHasOpponentPieceAtForwardRight((!isEmpty(forwardRight) && getPiece(forwardRight).getColor() != pawnColor));
         }
     }
 
