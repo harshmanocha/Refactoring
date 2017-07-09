@@ -68,7 +68,7 @@ public class GameEngine {
     private void endGame() {
         System.out.println("Game Ended");
         Player winner = _currentPlayer;
-        winner.incrementGamesWon();
+        winner.increase();
         System.out.println("WINNER - " + winner + "\n\n");
         initGame();
     }

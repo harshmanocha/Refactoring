@@ -14,7 +14,7 @@ public class Player {
         return _name;
     }
 
-    public void incrementGamesWon() {
+    public void increase() {
         _gamesWon++;
     }
 
