@@ -42,7 +42,11 @@ public class GameEngine {
             Position from = inputPosition();
             System.out.print("Enter destination position: ");
             Position to = inputPosition();
-            makeMove(new Move(from, to));
+            Move move = new Move(from, to);
+            if (isValidMove(move))
+                makeMove(move);
+            else
+                System.out.println("Invalid move!");
         }
     }
 
@@ -111,23 +115,15 @@ public class GameEngine {
         return _player1 == _currentPlayer ? _player2 : _player1;
     }
 
-    private boolean makeMove(Move move) {
-        if (!isValidMove(move)) {
-            System.out.println("Invalid Move");
-            return false;
-        }
-        if (_chessBoard.movePiece(move.getFrom().getRow(), move.getFrom().getColumn(), move.getTo().getRow(), move.getTo().getColumn())) {
-            System.out.println("");
-            System.out.println(_chessBoard);
-            if (_chessBoard.isKingDead()) {
-                endGame();
-                initGame();
-                return true;
-            }
+    private void makeMove(Move move) {
+        _chessBoard.movePiece(move.getFrom().getRow(), move.getFrom().getColumn(), move.getTo().getRow(), move.getTo().getColumn());
+        System.out.println("");
+        System.out.println(_chessBoard);
+        if (_chessBoard.isKingDead()) {
+            endGame();
+            initGame();
+        } else
             _currentPlayer = getOtherPlayer();
-            return true;
-        }
-        return false;
     }
 
     private boolean isValidMove(Move move) {

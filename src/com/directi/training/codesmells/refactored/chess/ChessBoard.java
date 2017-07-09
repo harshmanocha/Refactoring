@@ -106,18 +106,13 @@ public class ChessBoard {
                 && getPiece(from).isValidMove(from, to);
     }
 
-    public boolean movePiece(Position from, Position to) {
-        if (!isValidMove(from, to)) {
-            System.out.println("Invalid Move!");
-            return false;
-        }
+    public void movePiece(Position from, Position to) {
         updateIsKingDead(to);
         updatePawnStatus(to);
         if (!getCell(to).isEmpty())
             getCell(to).removePiece();
         getCell(to).setPiece(getPiece(from));
         getCell(from).removePiece();
-        return true;
     }
 
     private void updateIsKingDead(Position positionBeingMovedTo) {

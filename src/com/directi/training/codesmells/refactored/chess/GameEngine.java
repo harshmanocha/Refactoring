@@ -40,7 +40,10 @@ public class GameEngine {
             Position from = inputPosition();
             System.out.print("Enter destination position: ");
             Position to = inputPosition();
-            makeMove(from, to);
+            if (isValidMove(from, to))
+                makeMove(from, to);
+            else
+                System.out.println("Invalid move!");
         }
     }
 
@@ -62,24 +65,17 @@ public class GameEngine {
     }
 
     //Fixed Lazy-class Code Smell by removing Move class
-    private boolean makeMove(Position from, Position to) {
-        if (!isValidMove(from, to)) {
-            System.out.println("Invalid Move");
-            return false;
-        }
-        if (_chessBoard.movePiece(from, to)) {
-            System.out.println("Piece moved for Player : " + _currentPlayer);
-            System.out.println("");
-            System.out.println(_chessBoard);
-            if (_chessBoard.isKingDead()) {
-                endGame();
-                initGame();
-                return true;
-            }
-            _currentPlayer = getOtherPlayer();
+    private void makeMove(Position from, Position to) {
+        _chessBoard.movePiece(from, to);
+        System.out.println("Piece moved for Player : " + _currentPlayer);
+        System.out.println("");
+        System.out.println(_chessBoard);
+        if (_chessBoard.isKingDead()) {
+            endGame();
+            initGame();
             return true;
-        }
-        return false;
+        } else
+            _currentPlayer = getOtherPlayer();
     }
 
     private boolean isValidMove(Position from, Position to) {
