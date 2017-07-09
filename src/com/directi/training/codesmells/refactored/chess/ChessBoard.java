@@ -1,6 +1,7 @@
 package com.directi.training.codesmells.refactored.chess;
 
 import com.directi.training.codesmells.refactored.pieces.*;
+import com.sun.tools.javac.util.Pair;
 
 public class ChessBoard {
     // Fixes magic number code smell. Although this const is not supposed to be changed, but this avoids a typo
@@ -103,7 +104,45 @@ public class ChessBoard {
         return !(isPositionOutOfBounds(from) || isPositionOutOfBounds(to))
                 && !isEmpty(from)
                 && (isEmpty(to) || getPiece(from).getColor() != getPiece(to).getColor())
-                && getPiece(from).isValidMove(from, to);
+                && getPiece(from).isValidMove(from, to)
+                && hasNoPieceInPath(from, to);
+    }
+
+    private boolean hasNoPieceInPath(Position from, Position to) {
+        if (getPiece(from) instanceof Knight)
+            return hasNoPieceInPathOfKnight(from, to);
+        if (!Move.isStraightLineMove(from, to))
+            return false;
+        Pair<Integer, Integer> direction = new Pair<>(cappedCompare(to.getRow(), from.getRow()), cappedCompare(to.getColumn(), from.getColumn()));
+        from = translate(from, direction);
+        while (!from.equals(to)) {
+            if (!isEmpty(from))
+                return false;
+            from = translate(from, direction);
+        }
+        return true;
+    }
+
+    private int cappedCompare(int x, int y) {
+        return Math.max(-1, Math.min(1, Integer.compare(x, y)));
+    }
+
+    private Position translate(Position from, Pair<Integer, Integer> offset) {
+        return new Position(from.getRow() + offset.fst, from.getColumn() + offset.snd);
+    }
+
+    private boolean hasNoPieceInPathOfKnight(Position from, Position to) {
+        int columnDiff = Math.abs(to.getColumn() - from.getColumn());
+        int rowDiff = Math.abs(to.getRow() - from.getRow());
+        Pair <Integer, Integer> jumpDirection;
+        if (columnDiff == 2 && rowDiff == 1)
+            jumpDirection = new Pair<>(0, cappedCompare(to.getColumn(), from.getColumn()));
+        else if (rowDiff == 2 && columnDiff == 1)
+            jumpDirection = new Pair<>(cappedCompare(to.getRow(), from.getRow()), 0);
+        else
+            return false;
+        Position firstStepPosition = translate(from, jumpDirection);
+        return isEmpty(firstStepPosition) || isEmpty(translate(firstStepPosition, jumpDirection));
     }
 
     public void movePiece(Position from, Position to) {

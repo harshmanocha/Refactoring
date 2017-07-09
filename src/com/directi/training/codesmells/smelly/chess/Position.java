@@ -20,4 +20,12 @@ public class Position {
     public String toString() {
         return "(ROW: " + _row + ", COLUMN: " + _column + ")";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof Position))
+            return false;
+        Position otherPosition = (Position)obj;
+        return this == obj || (_row == otherPosition.getRow() && _column == otherPosition.getColumn());
+    }
 }

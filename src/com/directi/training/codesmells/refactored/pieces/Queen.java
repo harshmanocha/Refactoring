@@ -9,7 +9,7 @@ public class Queen extends Piece {
     }
 
     public boolean isValidMove(Position from, Position to) {
-        return Move.isDiagonalMove(from, to) || Move.isHorizontalOrVerticalMove(from, to);
+        return Move.isStraightLineMove(from, to);
     }
 
     @Override

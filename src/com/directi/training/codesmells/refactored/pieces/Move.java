@@ -11,4 +11,8 @@ public class Move {
     public  static boolean isHorizontalOrVerticalMove(Position from, Position to) {
         return from.getRow() == to.getRow() || from.getColumn() == to.getColumn();
     }
+
+    public static boolean isStraightLineMove(Position from, Position to) {
+        return isDiagonalMove(from, to) || isHorizontalOrVerticalMove(from, to);
+    }
 }
