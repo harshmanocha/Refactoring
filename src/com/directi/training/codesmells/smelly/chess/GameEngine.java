@@ -111,7 +111,7 @@ public class GameEngine {
         return _player1 == _currentPlayer ? _player2 : _player1;
     }
 
-    public boolean makeMove(Move move) {
+    private boolean makeMove(Move move) {
         if (!isValidMove(move)) {
             System.out.println("Invalid Move");
             return false;

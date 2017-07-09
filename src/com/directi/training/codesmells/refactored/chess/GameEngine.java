@@ -62,7 +62,7 @@ public class GameEngine {
     }
 
     //Fixed Lazy-class Code Smell by removing Move class
-    public boolean makeMove(Position from, Position to) {
+    private boolean makeMove(Position from, Position to) {
         if (!isValidMove(from, to)) {
             System.out.println("Invalid Move");
             return false;
