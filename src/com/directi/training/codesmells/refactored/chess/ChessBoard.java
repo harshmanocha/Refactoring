@@ -116,21 +116,17 @@ public class ChessBoard {
         if (!Move.isStraightLineMove(from, to))
             return false;
         Pair<Integer, Integer> direction = new Pair<>(cappedCompare(to.getRow(), from.getRow()), cappedCompare(to.getColumn(), from.getColumn()));
-        from = translatedPosition(from, direction);
+        from = from.translatedPosition(direction);
         while (!from.equals(to)) {
             if (!isEmpty(from))
                 return false;
-            from = translatedPosition(from, direction);
+            from = from.translatedPosition(direction);
         }
         return true;
     }
 
     private int cappedCompare(int x, int y) {
         return Math.max(-1, Math.min(1, Integer.compare(x, y)));
-    }
-
-    private Position translatedPosition(Position from, Pair<Integer, Integer> offset) {
-        return new Position(from.getRow() + offset.fst, from.getColumn() + offset.snd);
     }
 
     private boolean hasNoPieceInPathOfKnight(Position from, Position to) {
@@ -143,8 +139,8 @@ public class ChessBoard {
             jumpDirection = new Pair<>(cappedCompare(to.getRow(), from.getRow()), 0);
         else
             return false;
-        Position firstStepPosition = translatedPosition(from, jumpDirection);
-        return isEmpty(firstStepPosition) || isEmpty(translatedPosition(firstStepPosition, jumpDirection));
+        Position firstStepPosition = from.translatedPosition(jumpDirection);
+        return isEmpty(firstStepPosition) || isEmpty(firstStepPosition.translatedPosition(jumpDirection));
     }
 
     public void movePiece(Position from, Position to) {

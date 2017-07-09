@@ -1,5 +1,7 @@
 package com.directi.training.codesmells.refactored.chess;
 
+import com.sun.tools.javac.util.Pair;
+
 public class Position {
     private int _row, _column;
 
@@ -14,6 +16,11 @@ public class Position {
 
     public int getColumn() {
         return _column;
+    }
+
+    //Fixes another instance of Feature Envy Code Smell
+    public Position translatedPosition(Pair<Integer, Integer> offset) {
+        return new Position(getRow() + offset.fst, getColumn() + offset.snd);
     }
 
     @Override
