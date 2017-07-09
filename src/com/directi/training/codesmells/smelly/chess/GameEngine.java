@@ -36,7 +36,7 @@ public class GameEngine {
 
     public void startGame() {
         while (true) {
-            System.out.println("\nNext move is of " + _currentPlayer.getName() +
+            System.out.println("Next move is of " + _currentPlayer.getName() +
                     " [" + _currentPlayer.getCurrentColor() + "]");
             System.out.print("Enter position (row col) of piece to move: ");
             Position from = inputPosition();
@@ -117,7 +117,7 @@ public class GameEngine {
             return false;
         }
         if (_chessBoard.movePiece(move.getFrom().getRow(), move.getFrom().getColumn(), move.getTo().getRow(), move.getTo().getColumn())) {
-            System.out.println("Piece moved for Player : " + _currentPlayer);
+            System.out.println("");
             System.out.println(_chessBoard);
             if (_chessBoard.isKingDead()) {
                 endGame();

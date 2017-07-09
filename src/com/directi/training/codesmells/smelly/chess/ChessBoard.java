@@ -105,14 +105,22 @@ public class ChessBoard {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder(" ");
+        for (int column = 0; column < 8; column++) {
+            stringBuilder.append("  ")
+                         .append(column + 1)
+                         .append("  ");
+        }
+        stringBuilder.append("\n");
+
         for (int row = 0; row < 8; row++) {
+            stringBuilder.append(row + 1);
             for (int column = 0; column < 8; column++) {
                 stringBuilder.append(" ")
                              .append(_board[row][column])
                              .append(" ");
             }
-            stringBuilder.append("\n");
+            stringBuilder.append("\n\n");
         }
         return stringBuilder.toString();
     }
