@@ -2,32 +2,39 @@ package com.directi.training.codesmells.smelly.chess;
 
 import com.directi.training.codesmells.smelly.pieces.Piece;
 
-public class Cell {
+public class Cell
+{
     private Piece _piece;
     private Color _color;
 
-    public Cell(Color color) {
+    public Cell(Color color)
+    {
         _color = color;
     }
 
-    public void setPiece(Piece piece) {
-        _piece = piece;
-    }
-
-    public void removePiece() {
+    public void removePiece()
+    {
         _piece = null;
     }
 
-    public Piece getPiece() {
+    public Piece getPiece()
+    {
         return _piece;
     }
 
-    public boolean isEmpty() {
+    public void setPiece(Piece piece)
+    {
+        _piece = piece;
+    }
+
+    public boolean isEmpty()
+    {
         return _piece == null;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return _piece == null
                 ? ("." + _color + ".")
                 : (_piece.getColor().toString() + _color + _piece.toString());

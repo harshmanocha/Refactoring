@@ -4,17 +4,21 @@ import com.directi.training.codesmells.refactored.chess.Color;
 import com.directi.training.codesmells.refactored.chess.Position;
 
 //Fixed Collapsing Hierarchy (another instance of lazy-class)
-public class Rook extends Piece {
-    public Rook(Color color) {
+public class Rook extends Piece
+{
+    public Rook(Color color)
+    {
         super(color);
     }
 
-    public boolean isValidMove(Position from, Position to) {
+    public boolean isValidMove(Position from, Position to)
+    {
         return Move.isHorizontalOrVerticalMove(from, to);
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "r";
     }
 }

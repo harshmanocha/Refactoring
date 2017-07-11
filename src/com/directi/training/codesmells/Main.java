@@ -5,17 +5,20 @@ import com.directi.training.codesmells.smelly.chess.Player;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main
+{
     private static final Scanner scanner = new Scanner(System.in);
     private static GameEngine gameEngine;
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         initGameEngine();
         gameEngine.initGame();
         gameEngine.startGame();
     }
 
-    private static void initGameEngine() {
+    private static void initGameEngine()
+    {
         System.out.print("Enter Player 1 Name: ");
         Player player1 = new Player(scanner.nextLine());
         System.out.print("Enter Player 2 Name: ");

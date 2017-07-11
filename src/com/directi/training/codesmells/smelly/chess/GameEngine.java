@@ -1,22 +1,26 @@
 package com.directi.training.codesmells.smelly.chess;
 
 import com.directi.training.codesmells.smelly.pieces.*;
+
 import java.util.Scanner;
 
-public class GameEngine {
+public class GameEngine
+{
+    private static final Scanner scanner = new Scanner(System.in);
     private final ChessBoard _chessBoard;
     private Player _player1, _player2;
     private Player _currentPlayer;
-    private static final Scanner scanner = new Scanner(System.in);
 
-    public GameEngine(Player player1, Player player2) {
+    public GameEngine(Player player1, Player player2)
+    {
         _chessBoard = new ChessBoard();
         _player1 = player1;
         _player2 = player2;
         resetBoard();
     }
 
-    public void initGame() {
+    public void initGame()
+    {
         if (_currentPlayer == null || _player1.getCurrentColor() == Color.BLACK) {
             _currentPlayer = _player1;
             _player1.setCurrentColor(Color.WHITE);
@@ -34,7 +38,8 @@ public class GameEngine {
         System.out.println(_chessBoard);
     }
 
-    public void startGame() {
+    public void startGame()
+    {
         while (true) {
             System.out.println("Next move is of " + _currentPlayer.getName() +
                     " [" + _currentPlayer.getCurrentColor() + "]");
@@ -50,13 +55,15 @@ public class GameEngine {
         }
     }
 
-    private Position inputPosition() {
+    private Position inputPosition()
+    {
         int row = scanner.nextInt() - 1;
         int col = scanner.nextInt() - 1;
         return new Position(row, col);
     }
 
-    public void resetBoard() {
+    public void resetBoard()
+    {
         for (int column = 0; column < 8; column++) {
             if (column == 0) {
                 _chessBoard.getBoard()[7][column].setPiece(new LeftRook(Color.WHITE));
@@ -104,18 +111,21 @@ public class GameEngine {
         _chessBoard._isKingDead = false;
     }
 
-    private void endGame() {
+    private void endGame()
+    {
         System.out.println("Game Ended");
         Player winner = _currentPlayer;
         winner.increase();
         System.out.println("WINNER - " + winner + "\n\n");
     }
 
-    private Player getOtherPlayer() {
+    private Player getOtherPlayer()
+    {
         return _player1 == _currentPlayer ? _player2 : _player1;
     }
 
-    private void makeMove(Move move) {
+    private void makeMove(Move move)
+    {
         _chessBoard.movePiece(move.getFrom().getRow(), move.getFrom().getColumn(), move.getTo().getRow(), move.getTo().getColumn());
         System.out.println("");
         System.out.println(_chessBoard);
@@ -126,7 +136,8 @@ public class GameEngine {
             _currentPlayer = getOtherPlayer();
     }
 
-    private boolean isValidMove(Move move) {
+    private boolean isValidMove(Move move)
+    {
         return (!_chessBoard.isEmpty(move.getFrom()) && _chessBoard.getPiece(move.getFrom()).getColor() == _currentPlayer.getCurrentColor())
                 && _chessBoard.isValidMove(move.getFrom().getRow(), move.getFrom().getColumn(), move.getTo().getRow(), move.getTo().getColumn());
     }

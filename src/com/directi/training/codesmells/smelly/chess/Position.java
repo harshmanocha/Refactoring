@@ -1,31 +1,37 @@
 package com.directi.training.codesmells.smelly.chess;
 
-public class Position {
+public class Position
+{
     private int _row, _column;
 
-    public Position(int row, int column) {
+    public Position(int row, int column)
+    {
         _row = row;
         _column = column;
     }
 
-    public int getRow() {
+    public int getRow()
+    {
         return _row;
     }
 
-    public int getColumn() {
+    public int getColumn()
+    {
         return _column;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "(ROW: " + _row + ", COLUMN: " + _column + ")";
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object obj)
+    {
         if (obj == null || !(obj instanceof Position))
             return false;
-        Position otherPosition = (Position)obj;
+        Position otherPosition = (Position) obj;
         return this == obj || (_row == otherPosition.getRow() && _column == otherPosition.getColumn());
     }
 }

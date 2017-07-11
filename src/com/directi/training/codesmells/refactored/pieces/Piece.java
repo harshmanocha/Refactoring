@@ -3,14 +3,17 @@ package com.directi.training.codesmells.refactored.pieces;
 import com.directi.training.codesmells.refactored.chess.Color;
 import com.directi.training.codesmells.refactored.chess.Position;
 
-public abstract class Piece {
+public abstract class Piece
+{
     private Color _color; //Fixed Indecent Exposure Code Smell by making field private
 
-    public Piece(Color color) {
+    public Piece(Color color)
+    {
         _color = color;
     }
 
-    public Color getColor() {
+    public Color getColor()
+    {
         return _color;
     }
 

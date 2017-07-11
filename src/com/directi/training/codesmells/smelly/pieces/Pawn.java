@@ -3,30 +3,35 @@ package com.directi.training.codesmells.smelly.pieces;
 import com.directi.training.codesmells.smelly.chess.Color;
 import com.directi.training.codesmells.smelly.chess.Position;
 
-public class Pawn extends Piece {
+public class Pawn extends Piece
+{
     private boolean _isAtInitialPosition;
     private boolean _hasOpponentPieceAtForwardLeft;
     private boolean _hasOpponentPieceAtForwardRight;
 
-    public Pawn(Color color) {
+    public Pawn(Color color)
+    {
         super(color, 'p');
         _isAtInitialPosition = true;
     }
 
-    public void setHasOpponentPieceAtForwardLeft(boolean hasOpponentPieceAtForwardLeft) {
+    public void setHasOpponentPieceAtForwardLeft(boolean hasOpponentPieceAtForwardLeft)
+    {
         _hasOpponentPieceAtForwardLeft = hasOpponentPieceAtForwardLeft;
     }
 
-    public void setHasOpponentPieceAtForwardRight(boolean hasOpponentPieceAtForwardRight) {
+    public void setHasOpponentPieceAtForwardRight(boolean hasOpponentPieceAtForwardRight)
+    {
         _hasOpponentPieceAtForwardRight = hasOpponentPieceAtForwardRight;
     }
 
     @Override
-    public boolean isValidMove(Position from, Position to) {
+    public boolean isValidMove(Position from, Position to)
+    {
         boolean isValidMove =
                 isForwardMove(from, to)
-                && isTakingAllowedNumberOfForwardSteps(from, to)
-                && isTakingAllowedNumberOfSidewaysSteps(from, to);
+                        && isTakingAllowedNumberOfForwardSteps(from, to)
+                        && isTakingAllowedNumberOfSidewaysSteps(from, to);
 
         if (isValidMove) {
             _isAtInitialPosition = false;
@@ -34,7 +39,8 @@ public class Pawn extends Piece {
         return isValidMove;
     }
 
-    private boolean isForwardMove(Position from, Position to) {
+    private boolean isForwardMove(Position from, Position to)
+    {
         switch (getColor()) {
             case WHITE:
                 return to.getRow() < from.getRow();
@@ -45,12 +51,14 @@ public class Pawn extends Piece {
         }
     }
 
-    private boolean isTakingAllowedNumberOfForwardSteps(Position from, Position to) {
+    private boolean isTakingAllowedNumberOfForwardSteps(Position from, Position to)
+    {
         int rowsAbsDiff = Math.abs(to.getRow() - from.getRow());
         return rowsAbsDiff > 0 && (rowsAbsDiff <= (_isAtInitialPosition ? 2 : 1));
     }
 
-    private boolean isTakingAllowedNumberOfSidewaysSteps(Position from, Position to) {
+    private boolean isTakingAllowedNumberOfSidewaysSteps(Position from, Position to)
+    {
         int columnsDiff = to.getColumn() - from.getColumn();
         if (columnsDiff == -1)
             return (_hasOpponentPieceAtForwardLeft && getColor() == Color.WHITE)
@@ -63,7 +71,8 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "p";
     }
 }

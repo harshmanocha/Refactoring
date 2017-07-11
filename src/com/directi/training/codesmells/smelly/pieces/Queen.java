@@ -2,13 +2,16 @@ package com.directi.training.codesmells.smelly.pieces;
 
 import com.directi.training.codesmells.smelly.chess.Color;
 
-public class Queen extends Piece {
-    public Queen(Color color) {
+public class Queen extends Piece
+{
+    public Queen(Color color)
+    {
         super(color, 'q');
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "q";
     }
 }
