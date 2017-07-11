@@ -8,7 +8,7 @@ public class ChessBoard
     // Fixes magic number code smell. Although this const is not supposed to be changed, but this avoids a typo
     private static final int BOARD_SIZE = 8;
     private final Cell[][] _board;
-    private boolean _isKingDead; //On fixing feature envy code smell, this should be made private and getBoard method be removed
+    private boolean _kingDead; //On fixing feature envy code smell, this should be made private and getBoard method be removed
 
     public ChessBoard()
     {
@@ -32,7 +32,7 @@ public class ChessBoard
     {
         placePieces(Color.WHITE);
         placePieces(Color.BLACK);
-        _isKingDead = false;
+        _kingDead = false;
     }
 
     private void placePieces(Color color)
@@ -171,7 +171,7 @@ public class ChessBoard
     private void updateIsKingDead(Position positionBeingMovedTo)
     {
         if (getPiece(positionBeingMovedTo) instanceof King) {
-            _isKingDead = true;
+            _kingDead = true;
         }
     }
 
@@ -189,9 +189,9 @@ public class ChessBoard
         }
     }
 
-    public boolean isKingDead()
+    public boolean getKingDead()
     {
-        return _isKingDead;
+        return _kingDead;
     }
 
     @Override

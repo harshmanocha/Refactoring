@@ -9,7 +9,7 @@ import com.sun.tools.javac.util.Pair;
 public class ChessBoard
 {
     private final Cell[][] _board;
-    public boolean _isKingDead;
+    public boolean _kingDead;
     public Player player1, player2;
 
     public ChessBoard()
@@ -149,7 +149,7 @@ public class ChessBoard
     private void updateIsKingDead(int row, int column)
     {
         if (getPiece(new Position(row, column)) instanceof King) {
-            _isKingDead = true;
+            _kingDead = true;
         }
     }
 
@@ -168,9 +168,9 @@ public class ChessBoard
         }
     }
 
-    public boolean isKingDead()
+    public boolean getKingDead()
     {
-        return _isKingDead;
+        return _kingDead;
     }
 
     @Override

@@ -78,7 +78,7 @@ public class GameEngine
         System.out.println("Piece moved for Player : " + _currentPlayer);
         System.out.println("");
         System.out.println(_chessBoard);
-        if (_chessBoard.isKingDead()) {
+        if (_chessBoard.getKingDead()) {
             endGame();
             initGame();
         } else

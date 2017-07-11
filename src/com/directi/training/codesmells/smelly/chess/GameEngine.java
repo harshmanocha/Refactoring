@@ -108,7 +108,7 @@ public class GameEngine
         for (int column = 0; column < 8; column++)
             _chessBoard.getBoard()[1][column].setPiece(new Pawn(Color.BLACK));
 
-        _chessBoard._isKingDead = false;
+        _chessBoard._kingDead = false;
     }
 
     private void endGame()
@@ -129,7 +129,7 @@ public class GameEngine
         _chessBoard.movePiece(move.getFrom().getRow(), move.getFrom().getColumn(), move.getTo().getRow(), move.getTo().getColumn());
         System.out.println("");
         System.out.println(_chessBoard);
-        if (_chessBoard.isKingDead()) {
+        if (_chessBoard.getKingDead()) {
             endGame();
             initGame();
         } else
