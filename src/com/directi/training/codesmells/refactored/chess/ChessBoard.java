@@ -84,9 +84,9 @@ public class ChessBoard
     private boolean isPositionOutOfBounds(Position position)
     {
         return (position.getRow() < 0
-                || position.getRow() >= 8
+                || position.getRow() >= BOARD_SIZE
                 || position.getColumn() < 0
-                || position.getColumn() >= 8);
+                || position.getColumn() >= BOARD_SIZE);
     }
 
     public boolean isEmpty(Position position)
