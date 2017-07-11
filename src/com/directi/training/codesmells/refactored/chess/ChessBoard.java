@@ -189,7 +189,7 @@ public class ChessBoard
         }
     }
 
-    public boolean getKingDead()
+    public boolean isKingDead()
     {
         return _kingDead;
     }

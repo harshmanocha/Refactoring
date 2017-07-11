@@ -129,7 +129,7 @@ public class GameEngine
         _chessBoard.movePiece(move.getFrom().getRow(), move.getFrom().getColumn(), move.getTo().getRow(), move.getTo().getColumn());
         System.out.println("");
         System.out.println(_chessBoard);
-        if (_chessBoard.getKingDead()) {
+        if (_chessBoard.isKingDead()) {
             endGame();
             initGame();
         } else
