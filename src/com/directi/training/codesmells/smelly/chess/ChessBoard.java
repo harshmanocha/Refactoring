@@ -83,10 +83,11 @@ public class ChessBoard
         Position from = new Position(fromRow, fromColumn);
         Position to = new Position(toRow, toColumn);
         return !(isPositionOutOfBounds(from) || isPositionOutOfBounds(to))
-                && !isEmpty(from)
-                && (isEmpty(to) || getPiece(from).getColor() != getPiece(to).getColor())
-                && getPiece(from).isValidMove(from, to)
-                && hasNoPieceInPath(from, to);
+               && !isEmpty(from)
+               && (isEmpty(to) || getPiece(from).getColor() != getPiece(to).getColor())
+               && getPiece(from).isValidMove(from, to)
+               && hasNoPieceInPath(from, to)
+               && (!(getPiece(from) instanceof Pawn) || isValidPawnMove(from, to));
     }
 
     private boolean hasNoPieceInPath(Position from, Position to)
@@ -137,7 +138,6 @@ public class ChessBoard
     public void movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
     {
         updateIsKingDead(toRow, toColumn);
-        updatePawnStatus(toRow, toColumn);
         Position from = new Position(fromRow, fromColumn);
         Position to = new Position(toRow, toColumn);
         if (!getCell(to).isEmpty())
@@ -153,19 +153,20 @@ public class ChessBoard
         }
     }
 
-    private void updatePawnStatus(int row, int column)
+    private boolean isValidPawnMove(Position from, Position to)
     {
-        Position position = new Position(row, column);
-        if (getPiece(position) instanceof Pawn) {
-            Pawn pawn = (Pawn) getPiece(position);
-            Color pawnColor = pawn.getColor();
-            int forwardRow = position.getRow() + ((pawnColor == Color.BLACK) ? 1 : -1);
-            Position forwardLeft = new Position(forwardRow, position.getColumn() + (pawnColor == Color.WHITE ? -1 : 1));
-            Position forwardRight = new Position(forwardRow, position.getColumn() + (pawnColor == Color.WHITE ? 1 : -1));
+        assert getPiece(from) instanceof Pawn;
+        Pawn pawn = (Pawn)getPiece(from);
+        Color pawnColor = pawn.getColor();
+        int forwardRow = from.getRow() + ((pawnColor == Color.BLACK) ? 1 : -1);
+        Position forwardLeft = new Position(forwardRow, from.getColumn() + (pawnColor == Color.WHITE ? -1 : 1));
+        Position forwardRight = new Position(forwardRow, from.getColumn() + (pawnColor == Color.WHITE ? 1 : -1));
 
-            pawn.setOpponentPieceAtForwardLeft((!isEmpty(forwardLeft) && getPiece(forwardLeft).getColor() != pawnColor));
-            pawn.setOpponentPieceAtForwardRight((!isEmpty(forwardRight) && getPiece(forwardRight).getColor() != pawnColor));
-        }
+        boolean opponentPieceAtForwardLeft = !isEmpty(forwardLeft) && getPiece(forwardLeft).getColor() != pawnColor;
+        boolean opponentPieceAtForwardRight = !isEmpty(forwardRight) && getPiece(forwardRight).getColor() != pawnColor;
+        boolean atInitialPosition = from.getRow() == ((pawnColor == Color.BLACK) ? 1 : 6);
+
+        return pawn.isValidMoveGivenContext(from, to, atInitialPosition, opponentPieceAtForwardLeft, opponentPieceAtForwardRight);
     }
 
     public boolean isKingDead()

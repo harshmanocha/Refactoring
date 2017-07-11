@@ -5,38 +5,17 @@ import com.directi.training.codesmells.smelly.chess.Position;
 
 public class Pawn extends Piece
 {
-    private boolean _atInitialPosition;
-    private boolean _opponentPieceAtForwardLeft;
-    private boolean _opponentPieceAtForwardRight;
-
     public Pawn(Color color)
     {
         super(color, 'p');
-        _atInitialPosition = true;
-    }
-
-    public void setOpponentPieceAtForwardLeft(boolean opponentPieceAtForwardLeft)
-    {
-        _opponentPieceAtForwardLeft = opponentPieceAtForwardLeft;
-    }
-
-    public void setOpponentPieceAtForwardRight(boolean opponentPieceAtForwardRight)
-    {
-        _opponentPieceAtForwardRight = opponentPieceAtForwardRight;
     }
 
     @Override
     public boolean isValidMove(Position from, Position to)
     {
-        boolean isValidMove =
-                isForwardMove(from, to)
-                        && isTakingAllowedNumberOfForwardSteps(from, to)
-                        && isTakingAllowedNumberOfSidewaysSteps(from, to);
-
-        if (isValidMove) {
-            _atInitialPosition = false;
-        }
-        return isValidMove;
+        return isForwardMove(from, to)
+               && Math.abs(to.getColumn() - from.getColumn()) <= 1
+               && Math.abs(to.getRow() - from.getRow()) <= 2;
     }
 
     private boolean isForwardMove(Position from, Position to)
@@ -51,21 +30,35 @@ public class Pawn extends Piece
         }
     }
 
-    private boolean isTakingAllowedNumberOfForwardSteps(Position from, Position to)
+    public boolean isValidMoveGivenContext(Position from,
+                                           Position to,
+                                           boolean atInitialPosition,
+                                           boolean opponentPieceAtForwardLeft,
+                                           boolean opponentPieceAtForwardRight)
     {
-        int rowsAbsDiff = Math.abs(to.getRow() - from.getRow());
-        return rowsAbsDiff > 0 && (rowsAbsDiff <= (_atInitialPosition ? 2 : 1));
+        return isForwardMove(from, to)
+               && isTakingAllowedNumberOfForwardSteps(from, to, atInitialPosition)
+               && isTakingAllowedNumberOfSidewaysSteps(from, to, opponentPieceAtForwardLeft, opponentPieceAtForwardRight);
     }
 
-    private boolean isTakingAllowedNumberOfSidewaysSteps(Position from, Position to)
+    private boolean isTakingAllowedNumberOfForwardSteps(Position from, Position to, boolean atInitialPosition)
+    {
+        int rowsAbsDiff = Math.abs(to.getRow() - from.getRow());
+        return rowsAbsDiff > 0 && (rowsAbsDiff <= (atInitialPosition ? 2 : 1));
+    }
+
+    private boolean isTakingAllowedNumberOfSidewaysSteps(Position from,
+                                                         Position to,
+                                                         boolean opponentPieceAtForwardLeft,
+                                                         boolean opponentPieceAtForwardRight)
     {
         int columnsDiff = to.getColumn() - from.getColumn();
         if (columnsDiff == -1)
-            return (_opponentPieceAtForwardLeft && getColor() == Color.WHITE)
-                    || (_opponentPieceAtForwardRight && getColor() == Color.BLACK);
+            return (opponentPieceAtForwardLeft && getColor() == Color.WHITE)
+                   || (opponentPieceAtForwardRight && getColor() == Color.BLACK);
         if (columnsDiff == 1) {
-            return (_opponentPieceAtForwardRight && getColor() == Color.WHITE)
-                    || (_opponentPieceAtForwardLeft && getColor() == Color.BLACK);
+            return (opponentPieceAtForwardRight && getColor() == Color.WHITE)
+                   || (opponentPieceAtForwardLeft && getColor() == Color.BLACK);
         }
         return columnsDiff == 0;
     }

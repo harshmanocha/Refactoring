@@ -117,7 +117,8 @@ public class ChessBoard
                 && !isEmpty(from)
                 && (isEmpty(to) || getPiece(from).getColor() != getPiece(to).getColor())
                 && getPiece(from).isValidMove(from, to)
-                && hasNoPieceInPath(from, to);
+                && hasNoPieceInPath(from, to)
+                && (!(getPiece(from) instanceof Pawn) || isValidPawnMove(from, to));
     }
 
     //Fixed another instance of long method (also an example of switch-case)
@@ -161,7 +162,6 @@ public class ChessBoard
     public void movePiece(Position from, Position to)
     {
         updateIsKingDead(to);
-        updatePawnStatus(to);
         if (!getCell(to).isEmpty())
             getCell(to).removePiece();
         getCell(to).setPiece(getPiece(from));
@@ -175,18 +175,20 @@ public class ChessBoard
         }
     }
 
-    private void updatePawnStatus(Position position)
+    private boolean isValidPawnMove(Position from, Position to)
     {
-        if (getPiece(position) instanceof Pawn) {
-            Pawn pawn = (Pawn) getPiece(position);
-            Color pawnColor = pawn.getColor();
-            int forwardRow = position.getRow() + ((pawnColor == Color.BLACK) ? 1 : -1);
-            Position forwardLeft = new Position(forwardRow, position.getColumn() + (pawnColor == Color.WHITE ? -1 : 1));
-            Position forwardRight = new Position(forwardRow, position.getColumn() + (pawnColor == Color.WHITE ? 1 : -1));
+        assert getPiece(from) instanceof Pawn;
+        Pawn pawn = (Pawn)getPiece(from);
+        Color pawnColor = pawn.getColor();
+        int forwardRow = from.getRow() + ((pawnColor == Color.BLACK) ? 1 : -1);
+        Position forwardLeft = new Position(forwardRow, from.getColumn() + (pawnColor == Color.WHITE ? -1 : 1));
+        Position forwardRight = new Position(forwardRow, from.getColumn() + (pawnColor == Color.WHITE ? 1 : -1));
 
-            pawn.setOpponentPieceAtForwardLeft((!isEmpty(forwardLeft) && getPiece(forwardLeft).getColor() != pawnColor));
-            pawn.setOpponentPieceAtForwardRight((!isEmpty(forwardRight) && getPiece(forwardRight).getColor() != pawnColor));
-        }
+        boolean opponentPieceAtForwardLeft = !isEmpty(forwardLeft) && getPiece(forwardLeft).getColor() != pawnColor;
+        boolean opponentPieceAtForwardRight = !isEmpty(forwardRight) && getPiece(forwardRight).getColor() != pawnColor;
+        boolean atInitialPosition = from.getRow() == ((pawnColor == Color.BLACK) ? 1 : BOARD_SIZE - 2);
+
+        return pawn.isValidMoveGivenContext(from, to, atInitialPosition, opponentPieceAtForwardLeft, opponentPieceAtForwardRight);
     }
 
     public boolean isKingDead()
