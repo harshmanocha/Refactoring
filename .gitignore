@@ -11,6 +11,8 @@
 # Intellij project files
 *.ipr
 
+!.idea/codeStyleSettings.xml
+
 # User-specific stuff:
 .idea/**/workspace.xml
 .idea/**/tasks.xml
