@@ -5,16 +5,16 @@ public enum Color
     WHITE("W"),
     BLACK("B");
 
-    private String _string;
+    private String _colorString;
 
-    Color(String string)
+    Color(String colorString)
     {
-        _string = string;
+        _colorString = colorString;
     }
 
     @Override
     public String toString()
     {
-        return _string;
+        return _colorString;
     }
 }
