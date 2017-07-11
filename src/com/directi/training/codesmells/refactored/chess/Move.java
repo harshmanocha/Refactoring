@@ -1,6 +1,4 @@
-package com.directi.training.codesmells.refactored.pieces;
-
-import com.directi.training.codesmells.refactored.chess.Position;
+package com.directi.training.codesmells.refactored.chess;
 
 // Code Smell solved: Duplicated code across classes
 // (Queen class sharing code with Rook and Bishop,

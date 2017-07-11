@@ -1,6 +1,7 @@
 package com.directi.training.codesmells.refactored.pieces;
 
 import com.directi.training.codesmells.refactored.chess.Color;
+import com.directi.training.codesmells.refactored.chess.Move;
 import com.directi.training.codesmells.refactored.chess.Position;
 
 public class Queen extends Piece
