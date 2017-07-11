@@ -126,7 +126,7 @@ public class ChessBoard
     {
         if (getPiece(from) instanceof Knight)
             return hasNoPieceInPathOfKnight(from, to);
-        if (!Move.isStraightLineMove(from, to))
+        if (!MoveUtil.isStraightLineMove(from, to))
             return false;
         Pair<Integer, Integer> direction = new Pair<>(cappedCompare(to.getRow(), from.getRow()), cappedCompare(to.getColumn(), from.getColumn()));
         from = from.translatedPosition(direction);

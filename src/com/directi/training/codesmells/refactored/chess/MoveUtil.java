@@ -3,7 +3,7 @@ package com.directi.training.codesmells.refactored.chess;
 // Code Smell solved: Duplicated code across classes
 // (Queen class sharing code with Rook and Bishop,
 // as well as code duplicated in ChessBoard for finding straight line move)
-public class Move
+public class MoveUtil
 {
     public static boolean isDiagonalMove(Position from, Position to)
     {

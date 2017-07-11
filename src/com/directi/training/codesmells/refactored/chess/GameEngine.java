@@ -71,7 +71,7 @@ public class GameEngine
         return _player1 == _currentPlayer ? _player2 : _player1;
     }
 
-    //Fixed Lazy-class Code Smell by removing Move class
+    //Fixed Lazy-class Code Smell by removing MoveUtil class
     private void makeMove(Position from, Position to)
     {
         _chessBoard.movePiece(from, to);
