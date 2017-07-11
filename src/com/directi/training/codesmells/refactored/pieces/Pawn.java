@@ -5,24 +5,24 @@ import com.directi.training.codesmells.refactored.chess.Position;
 
 public class Pawn extends Piece
 {
-    private boolean _isAtInitialPosition;
-    private boolean _hasOpponentPieceAtForwardLeft;
-    private boolean _hasOpponentPieceAtForwardRight;
+    private boolean _atInitialPosition;
+    private boolean _opponentPieceAtForwardLeft;
+    private boolean _opponentPieceAtForwardRight;
 
     public Pawn(Color color)
     {
         super(color);
-        _isAtInitialPosition = true;
+        _atInitialPosition = true;
     }
 
-    public void setHasOpponentPieceAtForwardLeft(boolean hasOpponentPieceAtForwardLeft)
+    public void setOpponentPieceAtForwardLeft(boolean opponentPieceAtForwardLeft)
     {
-        _hasOpponentPieceAtForwardLeft = hasOpponentPieceAtForwardLeft;
+        _opponentPieceAtForwardLeft = opponentPieceAtForwardLeft;
     }
 
-    public void setHasOpponentPieceAtForwardRight(boolean hasOpponentPieceAtForwardRight)
+    public void setOpponentPieceAtForwardRight(boolean opponentPieceAtForwardRight)
     {
-        _hasOpponentPieceAtForwardRight = hasOpponentPieceAtForwardRight;
+        _opponentPieceAtForwardRight = opponentPieceAtForwardRight;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class Pawn extends Piece
                         && isTakingAllowedNumberOfSidewaysSteps(from, to);
 
         if (isValidMove) {
-            _isAtInitialPosition = false;
+            _atInitialPosition = false;
         }
         return isValidMove;
     }
@@ -54,18 +54,18 @@ public class Pawn extends Piece
     private boolean isTakingAllowedNumberOfForwardSteps(Position from, Position to)
     {
         int rowsAbsDiff = Math.abs(to.getRow() - from.getRow());
-        return rowsAbsDiff > 0 && (rowsAbsDiff <= (_isAtInitialPosition ? 2 : 1));
+        return rowsAbsDiff > 0 && (rowsAbsDiff <= (_atInitialPosition ? 2 : 1));
     }
 
     private boolean isTakingAllowedNumberOfSidewaysSteps(Position from, Position to)
     {
         int columnsDiff = to.getColumn() - from.getColumn();
         if (columnsDiff == -1)
-            return (_hasOpponentPieceAtForwardLeft && getColor() == Color.WHITE)
-                    || (_hasOpponentPieceAtForwardRight && getColor() == Color.BLACK);
+            return (_opponentPieceAtForwardLeft && getColor() == Color.WHITE)
+                    || (_opponentPieceAtForwardRight && getColor() == Color.BLACK);
         if (columnsDiff == 1) {
-            return (_hasOpponentPieceAtForwardRight && getColor() == Color.WHITE)
-                    || (_hasOpponentPieceAtForwardLeft && getColor() == Color.BLACK);
+            return (_opponentPieceAtForwardRight && getColor() == Color.WHITE)
+                    || (_opponentPieceAtForwardLeft && getColor() == Color.BLACK);
         }
         return columnsDiff == 0;
     }

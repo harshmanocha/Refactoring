@@ -163,8 +163,8 @@ public class ChessBoard
             Position forwardLeft = new Position(forwardRow, position.getColumn() + (pawnColor == Color.WHITE ? -1 : 1));
             Position forwardRight = new Position(forwardRow, position.getColumn() + (pawnColor == Color.WHITE ? 1 : -1));
 
-            pawn.setHasOpponentPieceAtForwardLeft((!isEmpty(forwardLeft) && getPiece(forwardLeft).getColor() != pawnColor));
-            pawn.setHasOpponentPieceAtForwardRight((!isEmpty(forwardRight) && getPiece(forwardRight).getColor() != pawnColor));
+            pawn.setOpponentPieceAtForwardLeft((!isEmpty(forwardLeft) && getPiece(forwardLeft).getColor() != pawnColor));
+            pawn.setOpponentPieceAtForwardRight((!isEmpty(forwardRight) && getPiece(forwardRight).getColor() != pawnColor));
         }
     }
 
