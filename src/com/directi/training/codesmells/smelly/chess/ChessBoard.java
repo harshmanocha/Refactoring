@@ -63,7 +63,7 @@ public class ChessBoard
         if (isPositionOutOfBounds(position))
             return null;
         Color color = getCell(position).getPiece().getColor();
-        if (color == player1.getCurrentColor()) {
+        if (color == player1.getColor()) {
             return player1.getName();
         } else {
             return player2.getName();

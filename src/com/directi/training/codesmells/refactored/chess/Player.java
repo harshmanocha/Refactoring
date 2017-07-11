@@ -4,7 +4,7 @@ public class Player
 {
     private String _name;
     private int _gamesWon;
-    private Color _currentColor;
+    private Color _color;
 
     public Player(String name)
     {
@@ -23,14 +23,14 @@ public class Player
         _gamesWon++;
     }
 
-    public Color getCurrentColor()
+    public Color getColor()
     {
-        return _currentColor;
+        return _color;
     }
 
-    public void setCurrentColor(Color currentColor)
+    public void setColor(Color color)
     {
-        _currentColor = currentColor;
+        _color = color;
     }
 
     @Override

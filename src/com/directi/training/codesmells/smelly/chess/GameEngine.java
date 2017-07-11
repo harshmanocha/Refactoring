@@ -21,18 +21,18 @@ public class GameEngine
 
     public void initGame()
     {
-        if (_currentPlayer == null || _player1.getCurrentColor() == Color.BLACK) {
+        if (_currentPlayer == null || _player1.getColor() == Color.BLACK) {
             _currentPlayer = _player1;
-            _player1.setCurrentColor(Color.WHITE);
-            _player2.setCurrentColor(Color.BLACK);
+            _player1.setColor(Color.WHITE);
+            _player2.setColor(Color.BLACK);
         } else {
             _currentPlayer = _player2;
-            _player1.setCurrentColor(Color.BLACK);
-            _player2.setCurrentColor(Color.WHITE);
+            _player1.setColor(Color.BLACK);
+            _player2.setColor(Color.WHITE);
         }
         System.out.println("\nGame initialized");
-        System.out.println("Player " + _player1.getName() + " has Color " + _player1.getCurrentColor());
-        System.out.println("Player " + _player2.getName() + " has Color " + _player2.getCurrentColor());
+        System.out.println("Player " + _player1.getName() + " has Color " + _player1.getColor());
+        System.out.println("Player " + _player2.getName() + " has Color " + _player2.getColor());
         System.out.println("");
         resetBoard();
         System.out.println(_chessBoard);
@@ -42,7 +42,7 @@ public class GameEngine
     {
         while (true) {
             System.out.println("Next move is of " + _currentPlayer.getName() +
-                    " [" + _currentPlayer.getCurrentColor() + "]");
+                               " [" + _currentPlayer.getColor() + "]");
             System.out.print("Enter position (row col) of piece to move: ");
             Position from = inputPosition();
             System.out.print("Enter destination position: ");
@@ -138,7 +138,7 @@ public class GameEngine
 
     private boolean isValidMove(Move move)
     {
-        return (!_chessBoard.isEmpty(move.getFrom()) && _chessBoard.getPiece(move.getFrom()).getColor() == _currentPlayer.getCurrentColor())
+        return (!_chessBoard.isEmpty(move.getFrom()) && _chessBoard.getPiece(move.getFrom()).getColor() == _currentPlayer.getColor())
                 && _chessBoard.isValidMove(move.getFrom().getRow(), move.getFrom().getColumn(), move.getTo().getRow(), move.getTo().getColumn());
     }
 }
