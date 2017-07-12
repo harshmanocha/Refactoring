@@ -123,6 +123,8 @@ public class ChessBoard
     // by extracting out code for knight in a separate method.
     private boolean hasNoPieceInPath(Position from, Position to)
     {
+        if (getPiece(from) instanceof Knight)
+            return true;
         if (!MoveUtil.isStraightLineMove(from, to))
             return false;
         Pair<Integer, Integer> direction = new Pair<>(cappedCompare(to.getRow(), from.getRow()), cappedCompare(to.getColumn(), from.getColumn()));
