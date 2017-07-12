@@ -13,8 +13,8 @@ public class Knight extends Piece
 
     public boolean isValidMove(Position from, Position to)
     {
-        int columnDiff = Math.abs(to.getColumn() - from.getColumn());
-        int rowDiff = Math.abs(to.getRow() - from.getRow());
+        int columnDiff = Math.abs(to.column - from.column);
+        int rowDiff = Math.abs(to.row - from.row);
         return (columnDiff == 2 && rowDiff == 1) || (columnDiff == 1 && rowDiff == 2);
     }
 

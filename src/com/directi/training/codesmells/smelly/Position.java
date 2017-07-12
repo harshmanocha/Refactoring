@@ -2,28 +2,18 @@ package com.directi.training.codesmells.smelly;
 
 public class Position
 {
-    private int _row, _column;
+    public final int row, column;
 
     public Position(int row, int column)
     {
-        _row = row;
-        _column = column;
-    }
-
-    public int getRow()
-    {
-        return _row;
-    }
-
-    public int getColumn()
-    {
-        return _column;
+        this.row = row;
+        this.column = column;
     }
 
     @Override
     public String toString()
     {
-        return "(ROW: " + _row + ", COLUMN: " + _column + ")";
+        return "(ROW: " + row + ", COLUMN: " + column + ")";
     }
 
     @Override
@@ -32,6 +22,6 @@ public class Position
         if (obj == null || !(obj instanceof Position))
             return false;
         Position otherPosition = (Position) obj;
-        return this == obj || (_row == otherPosition.getRow() && _column == otherPosition.getColumn());
+        return this == obj || (this.row == otherPosition.row && this.column == otherPosition.column);
     }
 }

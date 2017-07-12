@@ -85,10 +85,10 @@ public class ChessBoard
 
     private boolean isPositionOutOfBounds(Position position)
     {
-        return (position.getRow() < 0
-                || position.getRow() >= BOARD_SIZE
-                || position.getColumn() < 0
-                || position.getColumn() >= BOARD_SIZE);
+        return (position.row < 0
+                || position.row >= BOARD_SIZE
+                || position.column < 0
+                || position.column >= BOARD_SIZE);
     }
 
     public boolean isEmpty(Position position)
@@ -98,7 +98,7 @@ public class ChessBoard
 
     private Cell getCell(Position position)
     {
-        return _board[position.getRow()][position.getColumn()];
+        return _board[position.row][position.column];
     }
 
     //Dead-Code Code Smell fixed by removing getPlayerName and printMove methods (and also toString of Position),
@@ -128,7 +128,7 @@ public class ChessBoard
             return true;
         if (!MoveUtil.isStraightLineMove(from, to))
             return false;
-        Direction direction = new Direction(cappedCompare(to.getRow(), from.getRow()), cappedCompare(to.getColumn(), from.getColumn()));
+        Direction direction = new Direction(cappedCompare(to.row, from.row), cappedCompare(to.column, from.column));
         from = from.translatedPosition(direction);
         while (!from.equals(to)) {
             if (!isEmpty(from))
@@ -164,13 +164,13 @@ public class ChessBoard
         assert getPiece(from) instanceof Pawn;
         Pawn pawn = (Pawn)getPiece(from);
         Color pawnColor = pawn.getColor();
-        int forwardRow = from.getRow() + ((pawnColor == Color.BLACK) ? 1 : -1);
-        Position forwardLeft = new Position(forwardRow, from.getColumn() + (pawnColor == Color.WHITE ? -1 : 1));
-        Position forwardRight = new Position(forwardRow, from.getColumn() + (pawnColor == Color.WHITE ? 1 : -1));
+        int forwardRow = from.row + ((pawnColor == Color.BLACK) ? 1 : -1);
+        Position forwardLeft = new Position(forwardRow, from.column + (pawnColor == Color.WHITE ? -1 : 1));
+        Position forwardRight = new Position(forwardRow, from.column + (pawnColor == Color.WHITE ? 1 : -1));
 
         boolean opponentPieceAtForwardLeft = !isEmpty(forwardLeft) && getPiece(forwardLeft).getColor() != pawnColor;
         boolean opponentPieceAtForwardRight = !isEmpty(forwardRight) && getPiece(forwardRight).getColor() != pawnColor;
-        boolean atInitialPosition = from.getRow() == ((pawnColor == Color.BLACK) ? 1 : BOARD_SIZE - 2);
+        boolean atInitialPosition = from.row == ((pawnColor == Color.BLACK) ? 1 : BOARD_SIZE - 2);
 
         return pawn.isValidMoveGivenContext(from, to, atInitialPosition, opponentPieceAtForwardLeft, opponentPieceAtForwardRight);
     }
