@@ -1,10 +1,10 @@
 package com.directi.training.codesmells.smelly.chess;
 
+import com.directi.training.codesmells.smelly.Pair;
 import com.directi.training.codesmells.smelly.pieces.King;
 import com.directi.training.codesmells.smelly.pieces.Knight;
 import com.directi.training.codesmells.smelly.pieces.Pawn;
 import com.directi.training.codesmells.smelly.pieces.Piece;
-import com.sun.tools.javac.util.Pair;
 
 public class ChessBoard
 {
@@ -132,7 +132,7 @@ public class ChessBoard
 
     private Position translatedPosition(Position from, Pair<Integer, Integer> offset)
     {
-        return new Position(from.getRow() + offset.fst, from.getColumn() + offset.snd);
+        return new Position(from.getRow() + offset.first, from.getColumn() + offset.second);
     }
 
     public void movePiece(int fromRow, int fromColumn, int toRow, int toColumn)

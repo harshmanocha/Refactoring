@@ -1,7 +1,7 @@
 package com.directi.training.codesmells.refactored.chess;
 
+import com.directi.training.codesmells.refactored.Pair;
 import com.directi.training.codesmells.refactored.pieces.*;
-import com.sun.tools.javac.util.Pair;
 
 public class ChessBoard
 {
