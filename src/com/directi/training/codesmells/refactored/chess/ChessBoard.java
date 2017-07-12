@@ -125,8 +125,6 @@ public class ChessBoard
     // by extracting out code for knight in a separate method.
     private boolean hasNoPieceInPath(Position from, Position to)
     {
-        if (getPiece(from) instanceof Knight)
-            return hasNoPieceInPathOfKnight(from, to);
         if (!MoveUtil.isStraightLineMove(from, to))
             return false;
         Pair<Integer, Integer> direction = new Pair<>(cappedCompare(to.getRow(), from.getRow()), cappedCompare(to.getColumn(), from.getColumn()));
@@ -142,21 +140,6 @@ public class ChessBoard
     private int cappedCompare(int x, int y)
     {
         return Math.max(-1, Math.min(1, Integer.compare(x, y)));
-    }
-
-    private boolean hasNoPieceInPathOfKnight(Position from, Position to)
-    {
-        int columnDiff = Math.abs(to.getColumn() - from.getColumn());
-        int rowDiff = Math.abs(to.getRow() - from.getRow());
-        Pair<Integer, Integer> jumpDirection;
-        if (columnDiff == 2 && rowDiff == 1)
-            jumpDirection = new Pair<>(0, cappedCompare(to.getColumn(), from.getColumn()));
-        else if (rowDiff == 2 && columnDiff == 1)
-            jumpDirection = new Pair<>(cappedCompare(to.getRow(), from.getRow()), 0);
-        else
-            return false;
-        Position firstStepPosition = from.translatedPosition(jumpDirection);
-        return isEmpty(firstStepPosition) || isEmpty(firstStepPosition.translatedPosition(jumpDirection));
     }
 
     public void movePiece(Position from, Position to)
