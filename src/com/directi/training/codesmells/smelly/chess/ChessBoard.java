@@ -92,30 +92,18 @@ public class ChessBoard
 
     private boolean hasNoPieceInPath(Position from, Position to)
     {
-        if (getPiece(from) instanceof Knight) {
-            int columnDiff = Math.abs(to.getColumn() - from.getColumn());
-            int rowDiff = Math.abs(to.getRow() - from.getRow());
-            Pair<Integer, Integer> jumpDirection;
-            if (columnDiff == 2 && rowDiff == 1)
-                jumpDirection = new Pair<>(0, cappedCompare(to.getColumn(), from.getColumn()));
-            else if (rowDiff == 2 && columnDiff == 1)
-                jumpDirection = new Pair<>(cappedCompare(to.getRow(), from.getRow()), 0);
-            else
-                return false;
-            Position firstStepPosition = translatedPosition(from, jumpDirection);
-            return isEmpty(firstStepPosition) || isEmpty(translatedPosition(firstStepPosition, jumpDirection));
-        } else {
-            if (!isStraightLineMove(from, to))
-                return false;
-            Pair<Integer, Integer> direction = new Pair<>(cappedCompare(to.getRow(), from.getRow()), cappedCompare(to.getColumn(), from.getColumn()));
-            from = translatedPosition(from, direction);
-            while (!from.equals(to)) {
-                if (!isEmpty(from))
-                    return false;
-                from = translatedPosition(from, direction);
-            }
+        if (getPiece(from) instanceof Knight)
             return true;
+        if (!isStraightLineMove(from, to))
+            return false;
+        Pair<Integer, Integer> direction = new Pair<>(cappedCompare(to.getRow(), from.getRow()), cappedCompare(to.getColumn(), from.getColumn()));
+        from = translatedPosition(from, direction);
+        while (!from.equals(to)) {
+            if (!isEmpty(from))
+                return false;
+            from = translatedPosition(from, direction);
         }
+        return true;
     }
 
     private boolean isStraightLineMove(Position from, Position to)
