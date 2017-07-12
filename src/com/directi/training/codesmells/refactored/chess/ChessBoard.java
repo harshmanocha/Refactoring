@@ -104,9 +104,7 @@ public class ChessBoard
 
     public Piece getPiece(Position position)
     {
-        return (isPositionOutOfBounds(position) || getCell(position).isEmpty())
-                ? null
-                : getCell(position).getPiece();
+        return isEmpty(position) ? null : getCell(position).getPiece();
     }
 
     //Fixed long parameter list code smell: Pass the object itself instead of passing its data.
