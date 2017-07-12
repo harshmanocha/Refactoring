@@ -1,6 +1,8 @@
 package com.directi.training.codesmells.smelly.chess;
 
-import com.directi.training.codesmells.smelly.Pair;
+import com.directi.training.codesmells.smelly.Color;
+import com.directi.training.codesmells.smelly.Direction;
+import com.directi.training.codesmells.smelly.Position;
 import com.directi.training.codesmells.smelly.pieces.King;
 import com.directi.training.codesmells.smelly.pieces.Knight;
 import com.directi.training.codesmells.smelly.pieces.Pawn;
@@ -96,7 +98,7 @@ public class ChessBoard
             return true;
         if (!isStraightLineMove(from, to))
             return false;
-        Pair<Integer, Integer> direction = new Pair<>(cappedCompare(to.getRow(), from.getRow()), cappedCompare(to.getColumn(), from.getColumn()));
+        Direction direction = new Direction(cappedCompare(to.getRow(), from.getRow()), cappedCompare(to.getColumn(), from.getColumn()));
         from = translatedPosition(from, direction);
         while (!from.equals(to)) {
             if (!isEmpty(from))
@@ -118,9 +120,9 @@ public class ChessBoard
         return Math.max(-1, Math.min(1, Integer.compare(x, y)));
     }
 
-    private Position translatedPosition(Position from, Pair<Integer, Integer> offset)
+    private Position translatedPosition(Position from, Direction direction)
     {
-        return new Position(from.getRow() + offset.first, from.getColumn() + offset.second);
+        return new Position(from.getRow() + direction.rowOffset, from.getColumn() + direction.columnOffset);
     }
 
     public void movePiece(int fromRow, int fromColumn, int toRow, int toColumn)

@@ -1,5 +1,7 @@
 package com.directi.training.codesmells.refactored.chess;
 
+import com.directi.training.codesmells.refactored.Position;
+
 // Code Smell solved: Duplicated code across classes
 // (Queen class sharing code with Rook and Bishop,
 // as well as code duplicated in ChessBoard for finding straight line move)

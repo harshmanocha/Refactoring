@@ -1,7 +1,5 @@
-package com.directi.training.codesmells.refactored.chess;
+package com.directi.training.codesmells.refactored;
 
-
-import com.directi.training.codesmells.refactored.Pair;
 
 public class Position
 {
@@ -24,9 +22,9 @@ public class Position
     }
 
     //Fixes another instance of Feature Envy Code Smell
-    public Position translatedPosition(Pair<Integer, Integer> offset)
+    public Position translatedPosition(Direction direction)
     {
-        return new Position(getRow() + offset.first, getColumn() + offset.second);
+        return new Position(getRow() + direction.rowOffset, getColumn() + direction.columnOffset);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.directi.training.codesmells.refactored.chess;
+package com.directi.training.codesmells.refactored;
 
 public enum Color
 {

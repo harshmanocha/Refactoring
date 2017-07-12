@@ -1,6 +1,8 @@
 package com.directi.training.codesmells.refactored.chess;
 
-import com.directi.training.codesmells.refactored.Pair;
+import com.directi.training.codesmells.refactored.Color;
+import com.directi.training.codesmells.refactored.Direction;
+import com.directi.training.codesmells.refactored.Position;
 import com.directi.training.codesmells.refactored.pieces.*;
 
 public class ChessBoard
@@ -126,7 +128,7 @@ public class ChessBoard
             return true;
         if (!MoveUtil.isStraightLineMove(from, to))
             return false;
-        Pair<Integer, Integer> direction = new Pair<>(cappedCompare(to.getRow(), from.getRow()), cappedCompare(to.getColumn(), from.getColumn()));
+        Direction direction = new Direction(cappedCompare(to.getRow(), from.getRow()), cappedCompare(to.getColumn(), from.getColumn()));
         from = from.translatedPosition(direction);
         while (!from.equals(to)) {
             if (!isEmpty(from))

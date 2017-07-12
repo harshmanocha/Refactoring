@@ -1,5 +1,7 @@
 package com.directi.training.codesmells.smelly.chess;
 
+import com.directi.training.codesmells.smelly.Color;
+import com.directi.training.codesmells.smelly.Position;
 import com.directi.training.codesmells.smelly.pieces.*;
 
 import java.util.Scanner;

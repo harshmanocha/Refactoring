@@ -1,5 +1,7 @@
 package com.directi.training.codesmells.smelly.chess;
 
+import com.directi.training.codesmells.smelly.Position;
+
 public class Move
 {
     private Position _from, _to;
