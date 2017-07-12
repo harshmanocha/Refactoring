@@ -14,8 +14,8 @@ public class Pawn extends Piece
     public boolean isValidMove(Position from, Position to)
     {
         return isForwardMove(from, to)
-               && Math.abs(to.getColumn() - from.getColumn()) <= 1
-               && Math.abs(to.getRow() - from.getRow()) <= 2;
+               && (Math.abs(to.getColumn() - from.getColumn()) <= 1 ||
+                Math.abs(to.getRow() - from.getRow()) <= 2);
     }
 
     private boolean isForwardMove(Position from, Position to)
