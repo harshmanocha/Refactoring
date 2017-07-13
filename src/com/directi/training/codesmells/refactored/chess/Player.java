@@ -1,5 +1,7 @@
 package com.directi.training.codesmells.refactored.chess;
 
+import com.directi.training.codesmells.refactored.Color;
+
 public class Player
 {
     private String _name;

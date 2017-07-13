@@ -1,5 +1,8 @@
 package com.directi.training.codesmells.refactored.chess;
 
+import com.directi.training.codesmells.refactored.Color;
+import com.directi.training.codesmells.refactored.Position;
+
 import java.util.Scanner;
 
 public class GameEngine

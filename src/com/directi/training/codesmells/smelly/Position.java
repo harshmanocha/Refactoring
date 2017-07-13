@@ -1,10 +1,9 @@
-package com.directi.training.codesmells.refactored.chess;
-
-import com.sun.tools.javac.util.Pair;
+package com.directi.training.codesmells.smelly;
 
 public class Position
 {
-    private int _row, _column;
+    private final int _row;
+    private final int _column;
 
     public Position(int row, int column)
     {
@@ -22,10 +21,10 @@ public class Position
         return _column;
     }
 
-    //Fixes another instance of Feature Envy Code Smell
-    public Position translatedPosition(Pair<Integer, Integer> offset)
+    @Override
+    public String toString()
     {
-        return new Position(getRow() + offset.fst, getColumn() + offset.snd);
+        return "(ROW: " + _row + ", COLUMN: " + _column + ")";
     }
 
     @Override

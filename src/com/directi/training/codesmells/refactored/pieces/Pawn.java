@@ -1,7 +1,7 @@
 package com.directi.training.codesmells.refactored.pieces;
 
-import com.directi.training.codesmells.refactored.chess.Color;
-import com.directi.training.codesmells.refactored.chess.Position;
+import com.directi.training.codesmells.refactored.Color;
+import com.directi.training.codesmells.refactored.Position;
 
 public class Pawn extends Piece
 {
@@ -13,9 +13,10 @@ public class Pawn extends Piece
     @Override
     public boolean isValidMove(Position from, Position to)
     {
+        int columnsMoved = Math.abs(to.getColumn() - from.getColumn());
+        int rowsMoved = Math.abs(to.getRow() - from.getRow());
         return isForwardMove(from, to)
-               && Math.abs(to.getColumn() - from.getColumn()) <= 1
-               && Math.abs(to.getRow() - from.getRow()) <= 2;
+               && ((columnsMoved <= 1 && rowsMoved == 1) || (columnsMoved == 0 && rowsMoved == 2));
     }
 
     private boolean isForwardMove(Position from, Position to)

@@ -1,10 +1,12 @@
 package com.directi.training.codesmells.smelly.chess;
 
+import com.directi.training.codesmells.smelly.Color;
+import com.directi.training.codesmells.smelly.Direction;
+import com.directi.training.codesmells.smelly.Position;
 import com.directi.training.codesmells.smelly.pieces.King;
 import com.directi.training.codesmells.smelly.pieces.Knight;
 import com.directi.training.codesmells.smelly.pieces.Pawn;
 import com.directi.training.codesmells.smelly.pieces.Piece;
-import com.sun.tools.javac.util.Pair;
 
 public class ChessBoard
 {
@@ -92,30 +94,18 @@ public class ChessBoard
 
     private boolean hasNoPieceInPath(Position from, Position to)
     {
-        if (getPiece(from) instanceof Knight) {
-            int columnDiff = Math.abs(to.getColumn() - from.getColumn());
-            int rowDiff = Math.abs(to.getRow() - from.getRow());
-            Pair<Integer, Integer> jumpDirection;
-            if (columnDiff == 2 && rowDiff == 1)
-                jumpDirection = new Pair<>(0, cappedCompare(to.getColumn(), from.getColumn()));
-            else if (rowDiff == 2 && columnDiff == 1)
-                jumpDirection = new Pair<>(cappedCompare(to.getRow(), from.getRow()), 0);
-            else
-                return false;
-            Position firstStepPosition = translatedPosition(from, jumpDirection);
-            return isEmpty(firstStepPosition) || isEmpty(translatedPosition(firstStepPosition, jumpDirection));
-        } else {
-            if (!isStraightLineMove(from, to))
-                return false;
-            Pair<Integer, Integer> direction = new Pair<>(cappedCompare(to.getRow(), from.getRow()), cappedCompare(to.getColumn(), from.getColumn()));
-            from = translatedPosition(from, direction);
-            while (!from.equals(to)) {
-                if (!isEmpty(from))
-                    return false;
-                from = translatedPosition(from, direction);
-            }
+        if (getPiece(from) instanceof Knight)
             return true;
+        if (!isStraightLineMove(from, to))
+            return false;
+        Direction direction = new Direction(cappedCompare(to.getRow(), from.getRow()), cappedCompare(to.getColumn(), from.getColumn()));
+        from = translatedPosition(from, direction);
+        while (!from.equals(to)) {
+            if (!isEmpty(from))
+                return false;
+            from = translatedPosition(from, direction);
         }
+        return true;
     }
 
     private boolean isStraightLineMove(Position from, Position to)
@@ -130,9 +120,9 @@ public class ChessBoard
         return Math.max(-1, Math.min(1, Integer.compare(x, y)));
     }
 
-    private Position translatedPosition(Position from, Pair<Integer, Integer> offset)
+    private Position translatedPosition(Position from, Direction direction)
     {
-        return new Position(from.getRow() + offset.fst, from.getColumn() + offset.snd);
+        return new Position(from.getRow() + direction.getRowOffset(), from.getColumn() + direction.getColumnOffset());
     }
 
     public void movePiece(int fromRow, int fromColumn, int toRow, int toColumn)

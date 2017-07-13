@@ -1,5 +1,6 @@
 package com.directi.training.codesmells.refactored.chess;
 
+import com.directi.training.codesmells.refactored.Color;
 import com.directi.training.codesmells.refactored.pieces.Piece;
 
 public class Cell

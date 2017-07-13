@@ -1,7 +1,9 @@
 package com.directi.training.codesmells.refactored.chess;
 
+import com.directi.training.codesmells.refactored.Color;
+import com.directi.training.codesmells.refactored.Direction;
+import com.directi.training.codesmells.refactored.Position;
 import com.directi.training.codesmells.refactored.pieces.*;
-import com.sun.tools.javac.util.Pair;
 
 public class ChessBoard
 {
@@ -27,7 +29,7 @@ public class ChessBoard
         }
     }
 
-    //Code smells solved: Duplicate code and long method.
+    //Code smells solved: Duplicate code (within method) and long method.
     public void resetBoard()
     {
         placePieces(Color.WHITE);
@@ -102,11 +104,10 @@ public class ChessBoard
     //Dead-Code Code Smell fixed by removing getPlayerName and printMove methods (and also toString of Position),
     // as well as player 1 and player 2 fields.
 
+    //Fixed Duplicate Code across methods of same class Code-Smell by calling isEmpty method
     public Piece getPiece(Position position)
     {
-        return (isPositionOutOfBounds(position) || getCell(position).isEmpty())
-                ? null
-                : getCell(position).getPiece();
+        return isEmpty(position) ? null : getCell(position).getPiece();
     }
 
     //Fixed long parameter list code smell: Pass the object itself instead of passing its data.
@@ -121,15 +122,13 @@ public class ChessBoard
                 && (!(getPiece(from) instanceof Pawn) || isValidPawnMove(from, to));
     }
 
-    //Fixed another instance of long method (also an example of switch-case)
-    // by extracting out code for knight in a separate method.
     private boolean hasNoPieceInPath(Position from, Position to)
     {
         if (getPiece(from) instanceof Knight)
-            return hasNoPieceInPathOfKnight(from, to);
+            return true;
         if (!MoveUtil.isStraightLineMove(from, to))
             return false;
-        Pair<Integer, Integer> direction = new Pair<>(cappedCompare(to.getRow(), from.getRow()), cappedCompare(to.getColumn(), from.getColumn()));
+        Direction direction = new Direction(cappedCompare(to.getRow(), from.getRow()), cappedCompare(to.getColumn(), from.getColumn()));
         from = from.translatedPosition(direction);
         while (!from.equals(to)) {
             if (!isEmpty(from))
@@ -142,21 +141,6 @@ public class ChessBoard
     private int cappedCompare(int x, int y)
     {
         return Math.max(-1, Math.min(1, Integer.compare(x, y)));
-    }
-
-    private boolean hasNoPieceInPathOfKnight(Position from, Position to)
-    {
-        int columnDiff = Math.abs(to.getColumn() - from.getColumn());
-        int rowDiff = Math.abs(to.getRow() - from.getRow());
-        Pair<Integer, Integer> jumpDirection;
-        if (columnDiff == 2 && rowDiff == 1)
-            jumpDirection = new Pair<>(0, cappedCompare(to.getColumn(), from.getColumn()));
-        else if (rowDiff == 2 && columnDiff == 1)
-            jumpDirection = new Pair<>(cappedCompare(to.getRow(), from.getRow()), 0);
-        else
-            return false;
-        Position firstStepPosition = from.translatedPosition(jumpDirection);
-        return isEmpty(firstStepPosition) || isEmpty(firstStepPosition.translatedPosition(jumpDirection));
     }
 
     public void movePiece(Position from, Position to)

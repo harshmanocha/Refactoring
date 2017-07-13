@@ -1,8 +1,10 @@
-package com.directi.training.codesmells.smelly.chess;
+package com.directi.training.codesmells.refactored;
+
 
 public class Position
 {
-    private int _row, _column;
+    private final int _row;
+    private final int _column;
 
     public Position(int row, int column)
     {
@@ -20,10 +22,10 @@ public class Position
         return _column;
     }
 
-    @Override
-    public String toString()
+    //Fixes another instance of Feature Envy Code Smell
+    public Position translatedPosition(Direction direction)
     {
-        return "(ROW: " + _row + ", COLUMN: " + _column + ")";
+        return new Position(getRow() + direction.getRowOffset(), getColumn() + direction.getColumnOffset());
     }
 
     @Override
