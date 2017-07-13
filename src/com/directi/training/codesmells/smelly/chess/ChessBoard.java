@@ -122,7 +122,7 @@ public class ChessBoard
 
     private Position translatedPosition(Position from, Direction direction)
     {
-        return new Position(from.getRow() + direction.rowOffset, from.getColumn() + direction.columnOffset);
+        return new Position(from.getRow() + direction.getRowOffset(), from.getColumn() + direction.getColumnOffset());
     }
 
     public void movePiece(int fromRow, int fromColumn, int toRow, int toColumn)

@@ -24,7 +24,7 @@ public class Position
     //Fixes another instance of Feature Envy Code Smell
     public Position translatedPosition(Direction direction)
     {
-        return new Position(getRow() + direction.rowOffset, getColumn() + direction.columnOffset);
+        return new Position(getRow() + direction.getRowOffset(), getColumn() + direction.getColumnOffset());
     }
 
     @Override

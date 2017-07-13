@@ -2,11 +2,21 @@ package com.directi.training.codesmells.refactored;
 
 public class Direction
 {
-    public final int rowOffset;
-    public final int columnOffset;
+    private int _rowOffset;
+    private int _columnOffset;
 
     public Direction(int rowOffset, int columnOffset) {
-        this.rowOffset = rowOffset;
-        this.columnOffset = columnOffset;
+        _rowOffset = rowOffset;
+        _columnOffset = columnOffset;
+    }
+
+    public int getRowOffset()
+    {
+        return _rowOffset;
+    }
+
+    public int getColumnOffset()
+    {
+        return _columnOffset;
     }
 }
