@@ -104,7 +104,7 @@ public class ChessBoard
     //Dead-Code Code Smell fixed by removing getPlayerName and printMove methods (and also toString of Position),
     // as well as player 1 and player 2 fields.
 
-    //Fixed Duplicate Code across classes code smell by calling isEmpty method
+    //Fixed Duplicate Code across methods of same class Code-Smell by calling isEmpty method
     public Piece getPiece(Position position)
     {
         return isEmpty(position) ? null : getCell(position).getPiece();
