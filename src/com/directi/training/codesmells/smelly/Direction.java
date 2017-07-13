@@ -2,8 +2,8 @@ package com.directi.training.codesmells.smelly;
 
 public class Direction
 {
-    private int _rowOffset;
-    private int _columnOffset;
+    private final int _rowOffset;
+    private final int _columnOffset;
 
     public Direction(int rowOffset, int columnOffset) {
         _rowOffset = rowOffset;

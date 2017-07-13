@@ -3,7 +3,8 @@ package com.directi.training.codesmells.refactored;
 
 public class Position
 {
-    private int _row, _column;
+    private final int _row;
+    private final int _column;
 
     public Position(int row, int column)
     {
