@@ -23,18 +23,18 @@ public abstract class Piece
     {
         switch (_type) {
             case 'b':
-                return Math.abs(from.row - to.row) == Math.abs(from.column - to.column);
+                return Math.abs(from.getRow() - to.getRow()) == Math.abs(from.getColumn() - to.getColumn());
             case 'r':
-                return from.row == to.row || from.column == to.column;
+                return from.getRow() == to.getRow() || from.getColumn() == to.getColumn();
             case 'k':
-                int columnDiff = Math.abs(to.column - from.column);
-                int rowDiff = Math.abs(to.row - from.row);
+                int columnDiff = Math.abs(to.getColumn() - from.getColumn());
+                int rowDiff = Math.abs(to.getRow() - from.getRow());
                 return (columnDiff == 2 && rowDiff == 1) || (columnDiff == 1 && rowDiff == 2);
             case 'q':
-                return Math.abs(from.row - to.row) == Math.abs(from.column - to.column)
-                        || from.row == to.row || from.column == to.column;
+                return Math.abs(from.getRow() - to.getRow()) == Math.abs(from.getColumn() - to.getColumn())
+                        || from.getRow() == to.getRow() || from.getColumn() == to.getColumn();
             case 'K':
-                return (Math.abs(from.row - to.row) == 1) && (Math.abs(from.column - to.column) == 1);
+                return (Math.abs(from.getRow() - to.getRow()) == 1) && (Math.abs(from.getColumn() - to.getColumn()) == 1);
             default:
                 return false;
         }

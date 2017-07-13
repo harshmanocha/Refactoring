@@ -3,18 +3,28 @@ package com.directi.training.codesmells.refactored;
 
 public class Position
 {
-    public final int row, column;
+    private int _row, _column;
 
     public Position(int row, int column)
     {
-        this.row = row;
-        this.column = column;
+        _row = row;
+        _column = column;
+    }
+
+    public int getRow()
+    {
+        return _row;
+    }
+
+    public int getColumn()
+    {
+        return _column;
     }
 
     //Fixes another instance of Feature Envy Code Smell
     public Position translatedPosition(Direction direction)
     {
-        return new Position(row + direction.rowOffset, column + direction.columnOffset);
+        return new Position(getRow() + direction.rowOffset, getColumn() + direction.columnOffset);
     }
 
     @Override
@@ -23,6 +33,6 @@ public class Position
         if (obj == null || !(obj instanceof Position))
             return false;
         Position otherPosition = (Position) obj;
-        return this == obj || (this.row == otherPosition.row && this.column == otherPosition.column);
+        return this == obj || (_row == otherPosition.getRow() && _column == otherPosition.getColumn());
     }
 }

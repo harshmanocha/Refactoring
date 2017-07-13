@@ -37,10 +37,10 @@ public class ChessBoard
 
     private boolean isPositionOutOfBounds(Position position)
     {
-        return (position.row < 0
-                || position.row >= 8
-                || position.column < 0
-                || position.column >= 8);
+        return (position.getRow() < 0
+                || position.getRow() >= 8
+                || position.getColumn() < 0
+                || position.getColumn() >= 8);
     }
 
     public boolean isEmpty(Position position)
@@ -50,7 +50,7 @@ public class ChessBoard
 
     private Cell getCell(Position position)
     {
-        return _board[position.row][position.column];
+        return _board[position.getRow()][position.getColumn()];
     }
 
     public Piece getPiece(Position position)
@@ -98,7 +98,7 @@ public class ChessBoard
             return true;
         if (!isStraightLineMove(from, to))
             return false;
-        Direction direction = new Direction(cappedCompare(to.row, from.row), cappedCompare(to.column, from.column));
+        Direction direction = new Direction(cappedCompare(to.getRow(), from.getRow()), cappedCompare(to.getColumn(), from.getColumn()));
         from = translatedPosition(from, direction);
         while (!from.equals(to)) {
             if (!isEmpty(from))
@@ -110,9 +110,9 @@ public class ChessBoard
 
     private boolean isStraightLineMove(Position from, Position to)
     {
-        return Math.abs(from.row - to.row) == Math.abs(from.column - to.column)
-                || from.row == to.row
-                || from.column == to.column;
+        return Math.abs(from.getRow() - to.getRow()) == Math.abs(from.getColumn() - to.getColumn())
+                || from.getRow() == to.getRow()
+                || from.getColumn() == to.getColumn();
     }
 
     private int cappedCompare(int x, int y)
@@ -122,7 +122,7 @@ public class ChessBoard
 
     private Position translatedPosition(Position from, Direction direction)
     {
-        return new Position(from.row + direction.rowOffset, from.column + direction.columnOffset);
+        return new Position(from.getRow() + direction.rowOffset, from.getColumn() + direction.columnOffset);
     }
 
     public void movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
@@ -148,13 +148,13 @@ public class ChessBoard
         assert getPiece(from) instanceof Pawn;
         Pawn pawn = (Pawn)getPiece(from);
         Color pawnColor = pawn.getColor();
-        int forwardRow = from.row + ((pawnColor == Color.BLACK) ? 1 : -1);
-        Position forwardLeft = new Position(forwardRow, from.column + (pawnColor == Color.WHITE ? -1 : 1));
-        Position forwardRight = new Position(forwardRow, from.column + (pawnColor == Color.WHITE ? 1 : -1));
+        int forwardRow = from.getRow() + ((pawnColor == Color.BLACK) ? 1 : -1);
+        Position forwardLeft = new Position(forwardRow, from.getColumn() + (pawnColor == Color.WHITE ? -1 : 1));
+        Position forwardRight = new Position(forwardRow, from.getColumn() + (pawnColor == Color.WHITE ? 1 : -1));
 
         boolean opponentPieceAtForwardLeft = !isEmpty(forwardLeft) && getPiece(forwardLeft).getColor() != pawnColor;
         boolean opponentPieceAtForwardRight = !isEmpty(forwardRight) && getPiece(forwardRight).getColor() != pawnColor;
-        boolean atInitialPosition = from.row == ((pawnColor == Color.BLACK) ? 1 : 6);
+        boolean atInitialPosition = from.getRow() == ((pawnColor == Color.BLACK) ? 1 : 6);
 
         return pawn.isValidMoveGivenContext(from, to, atInitialPosition, opponentPieceAtForwardLeft, opponentPieceAtForwardRight);
     }

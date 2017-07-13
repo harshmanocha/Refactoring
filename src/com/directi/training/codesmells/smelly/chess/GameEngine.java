@@ -128,7 +128,7 @@ public class GameEngine
 
     private void makeMove(Move move)
     {
-        _chessBoard.movePiece(move.getFrom().row, move.getFrom().column, move.getTo().row, move.getTo().column);
+        _chessBoard.movePiece(move.getFrom().getRow(), move.getFrom().getColumn(), move.getTo().getRow(), move.getTo().getColumn());
         System.out.println("");
         System.out.println(_chessBoard);
         if (_chessBoard.isKingDead()) {
@@ -141,6 +141,6 @@ public class GameEngine
     private boolean isValidMove(Move move)
     {
         return (!_chessBoard.isEmpty(move.getFrom()) && _chessBoard.getPiece(move.getFrom()).getColor() == _currentPlayer.getColor())
-                && _chessBoard.isValidMove(move.getFrom().row, move.getFrom().column, move.getTo().row, move.getTo().column);
+                && _chessBoard.isValidMove(move.getFrom().getRow(), move.getFrom().getColumn(), move.getTo().getRow(), move.getTo().getColumn());
     }
 }

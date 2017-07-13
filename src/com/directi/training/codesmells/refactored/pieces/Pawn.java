@@ -13,8 +13,8 @@ public class Pawn extends Piece
     @Override
     public boolean isValidMove(Position from, Position to)
     {
-        int columnsMoved = Math.abs(to.column - from.column);
-        int rowsMoved = Math.abs(to.row - from.row);
+        int columnsMoved = Math.abs(to.getColumn() - from.getColumn());
+        int rowsMoved = Math.abs(to.getRow() - from.getRow());
         return isForwardMove(from, to)
                && ((columnsMoved <= 1 && rowsMoved == 1) || (columnsMoved == 0 && rowsMoved == 2));
     }
@@ -23,9 +23,9 @@ public class Pawn extends Piece
     {
         switch (getColor()) {
             case WHITE:
-                return to.row < from.row;
+                return to.getRow() < from.getRow();
             case BLACK:
-                return to.row > from.row;
+                return to.getRow() > from.getRow();
             default:
                 return false;
         }
@@ -44,7 +44,7 @@ public class Pawn extends Piece
 
     private boolean isTakingAllowedNumberOfForwardSteps(Position from, Position to, boolean atInitialPosition)
     {
-        int rowsAbsDiff = Math.abs(to.row - from.row);
+        int rowsAbsDiff = Math.abs(to.getRow() - from.getRow());
         return rowsAbsDiff > 0 && (rowsAbsDiff <= (atInitialPosition ? 2 : 1));
     }
 
@@ -53,7 +53,7 @@ public class Pawn extends Piece
                                                          boolean opponentPieceAtForwardLeft,
                                                          boolean opponentPieceAtForwardRight)
     {
-        int columnsDiff = to.column - from.column;
+        int columnsDiff = to.getColumn() - from.getColumn();
         if (columnsDiff == -1)
             return (opponentPieceAtForwardLeft && getColor() == Color.WHITE)
                     || (opponentPieceAtForwardRight && getColor() == Color.BLACK);

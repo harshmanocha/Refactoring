@@ -13,7 +13,7 @@ public class King extends Piece
     @Override
     public boolean isValidMove(Position from, Position to)
     {
-        return (Math.abs(from.row - to.row) == 1) && (Math.abs(from.column - to.column) == 1);
+        return (Math.abs(from.getRow() - to.getRow()) == 1) && (Math.abs(from.getColumn() - to.getColumn()) == 1);
     }
 
     @Override
