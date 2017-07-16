@@ -75,7 +75,7 @@ public class GameEngine
     }
 
     //Fixed Lazy-class Code Smell by removing MoveUtil class
-    private void makeMove(Position from, Position to)
+    public void makeMove(Position from, Position to)
     {
         _chessBoard.movePiece(from, to);
         System.out.println("Piece moved for Player : " + _currentPlayer);
@@ -90,8 +90,14 @@ public class GameEngine
 
     private boolean isValidMove(Position from, Position to)
     {
-        return (!_chessBoard.isEmpty(from) && _chessBoard.getPiece(from).getColor() == _currentPlayer.getColor())
-                && _chessBoard.isValidMove(from, to);
+        return (!_chessBoard.isEmpty(from) &&
+                _chessBoard.getPiece(from).getColor() == _currentPlayer.getColor()) &&
+               _chessBoard.isValidMove(from, to);
+    }
+
+    public ChessBoard getChessBoard()
+    {
+        return _chessBoard;
     }
 
 }
