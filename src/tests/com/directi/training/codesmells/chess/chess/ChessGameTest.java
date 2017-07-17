@@ -25,6 +25,8 @@ public class ChessGameTest
         _gameEngine.makeMove(new Move(from, to));
     }
 
+    //DO NOT CHANGE ANY STATEMENT FROM CODE BELOW
+
     @Before
     public void initGame()
     {
