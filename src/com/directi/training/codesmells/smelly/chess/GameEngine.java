@@ -43,17 +43,19 @@ public class GameEngine
     public void startGame()
     {
         while (true) {
-            System.out.println("Next move is of " + _currentPlayer.getName() +
-                               " [" + _currentPlayer.getColor() + "]");
+            System.out.println(
+                "Next move is of " + _currentPlayer.getName() + " [" + _currentPlayer.getColor() +
+                "]");
             System.out.print("Enter position (row col) of piece to move: ");
             Position from = inputPosition();
             System.out.print("Enter destination position: ");
             Position to = inputPosition();
             Move move = new Move(from, to);
-            if (isValidMove(move))
+            if (isValidMove(move)) {
                 makeMove(move);
-            else
+            } else {
                 System.out.println("Invalid move!");
+            }
         }
     }
 
@@ -85,8 +87,9 @@ public class GameEngine
                 _chessBoard.getBoard()[7][column].setPiece(new RightRook(Color.WHITE));
             }
         }
-        for (int column = 0; column < 8; column++)
+        for (int column = 0; column < 8; column++) {
             _chessBoard.getBoard()[6][column].setPiece(new Pawn(Color.WHITE));
+        }
 
         for (int column = 0; column < 8; column++) {
             if (column == 0) {
@@ -107,8 +110,9 @@ public class GameEngine
                 _chessBoard.getBoard()[0][column].setPiece(new RightRook(Color.BLACK));
             }
         }
-        for (int column = 0; column < 8; column++)
+        for (int column = 0; column < 8; column++) {
             _chessBoard.getBoard()[1][column].setPiece(new Pawn(Color.BLACK));
+        }
 
         _chessBoard._kingDead = false;
     }
@@ -126,21 +130,31 @@ public class GameEngine
         return _player1 == _currentPlayer ? _player2 : _player1;
     }
 
-    private void makeMove(Move move)
+    public void makeMove(Move move)
     {
-        _chessBoard.movePiece(move.getFrom().getRow(), move.getFrom().getColumn(), move.getTo().getRow(), move.getTo().getColumn());
+        _chessBoard
+            .movePiece(move.getFrom().getRow(), move.getFrom().getColumn(), move.getTo().getRow(),
+                move.getTo().getColumn());
         System.out.println("");
         System.out.println(_chessBoard);
         if (_chessBoard.isKingDead()) {
             endGame();
             initGame();
-        } else
+        } else {
             _currentPlayer = getOtherPlayer();
+        }
     }
 
     private boolean isValidMove(Move move)
     {
-        return (!_chessBoard.isEmpty(move.getFrom()) && _chessBoard.getPiece(move.getFrom()).getColor() == _currentPlayer.getColor())
-                && _chessBoard.isValidMove(move.getFrom().getRow(), move.getFrom().getColumn(), move.getTo().getRow(), move.getTo().getColumn());
+        return (!_chessBoard.isEmpty(move.getFrom()) &&
+                _chessBoard.getPiece(move.getFrom()).getColor() == _currentPlayer.getColor()) &&
+               _chessBoard.isValidMove(move.getFrom().getRow(), move.getFrom().getColumn(),
+                   move.getTo().getRow(), move.getTo().getColumn());
+    }
+
+    public ChessBoard getChessBoard()
+    {
+        return _chessBoard;
     }
 }
