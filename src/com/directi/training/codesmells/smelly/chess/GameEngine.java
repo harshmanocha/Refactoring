@@ -131,8 +131,7 @@ public class GameEngine
 
     public void makeMove(Move move)
     {
-        _chessBoard
-            .movePiece(move.getFrom().getRow(), move.getFrom().getColumn(), move.getTo().getRow(),
+        _chessBoard.movePiece(move.getFrom().getRow(), move.getFrom().getColumn(), move.getTo().getRow(),
                 move.getTo().getColumn());
         System.out.println("");
         System.out.println(_chessBoard);
@@ -144,7 +143,7 @@ public class GameEngine
         }
     }
 
-    private boolean isValidMove(Move move)
+    public boolean isValidMove(Move move)
     {
         return isPlayerMovingItsOwnColoredPiece(move.getFrom())
                && _chessBoard.isValidMove(move.getFrom().getRow(), move.getFrom().getColumn(),

@@ -90,7 +90,7 @@ public class GameEngine
         }
     }
 
-    private boolean isValidMove(Position from, Position to)
+    public boolean isValidMove(Position from, Position to)
     {
         return isPlayerMovingItsOwnColoredPiece(from)
                && _chessBoard.isValidMove(from, to);
