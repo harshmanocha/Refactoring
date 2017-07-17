@@ -59,8 +59,9 @@ public class ChessBoard
 
     private void placePawns(int row, Color color)
     {
-        for (int column = 0; column < BOARD_SIZE; column++)
+        for (int column = 0; column < BOARD_SIZE; column++) {
             _board[row][column].setPiece(new Pawn(color));
+        }
     }
 
     private void placeOtherPieces(int row, Color color)

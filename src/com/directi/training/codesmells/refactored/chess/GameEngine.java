@@ -47,10 +47,11 @@ public class GameEngine
             Position from = inputPosition();
             System.out.print("Enter destination position: ");
             Position to = inputPosition();
-            if (isValidMove(from, to))
+            if (isValidMove(from, to)) {
                 makeMove(from, to);
-            else
+            } else {
                 System.out.println("Invalid move!");
+            }
         }
     }
 
@@ -84,8 +85,9 @@ public class GameEngine
         if (_chessBoard.isKingDead()) {
             endGame();
             initGame();
-        } else
+        } else {
             _currentPlayer = getOtherPlayer();
+        }
     }
 
     private boolean isValidMove(Position from, Position to)
