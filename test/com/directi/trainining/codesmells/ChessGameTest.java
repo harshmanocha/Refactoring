@@ -1,4 +1,4 @@
-package tests.com.directi.training.codesmells.chess.chess;
+package com.directi.trainining.codesmells;
 
 import com.directi.training.codesmells.smelly.Position;
 import com.directi.training.codesmells.smelly.chess.ChessBoard;
