@@ -43,9 +43,8 @@ public class GameEngine
     public void startGame()
     {
         while (true) {
-            System.out.println(
-                "Next move is of " + _currentPlayer.getName() + " [" + _currentPlayer.getColor() +
-                "]");
+            System.out.println("Next move is of " + _currentPlayer.getName()
+                               + " [" + _currentPlayer.getColor() + "]");
             System.out.print("Enter position (row col) of piece to move: ");
             Position from = inputPosition();
             System.out.print("Enter destination position: ");
