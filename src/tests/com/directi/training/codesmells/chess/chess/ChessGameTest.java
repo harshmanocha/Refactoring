@@ -13,9 +13,6 @@ import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 
-/**
- * Created by rishabh.ja on 14/07/17.
- */
 public class ChessGameTest
 {
 
