@@ -1,13 +1,13 @@
 package com.directi.training.codesmells.smelly.pieces;
 
-import com.directi.training.codesmells.smelly.Color;
-import com.directi.training.codesmells.smelly.Position;
+import com.directi.training.codesmells.refactored.Color;
+import com.directi.training.codesmells.refactored.Position;
 
 public class Pawn extends Piece
 {
     public Pawn(Color color)
     {
-        super(color, 'p');
+        super(color);
     }
 
     @Override
@@ -56,10 +56,10 @@ public class Pawn extends Piece
         int columnsDiff = to.getColumn() - from.getColumn();
         if (columnsDiff == -1)
             return (opponentPieceAtForwardLeft && getColor() == Color.WHITE)
-                   || (opponentPieceAtForwardRight && getColor() == Color.BLACK);
+                    || (opponentPieceAtForwardRight && getColor() == Color.BLACK);
         if (columnsDiff == 1) {
             return (opponentPieceAtForwardRight && getColor() == Color.WHITE)
-                   || (opponentPieceAtForwardLeft && getColor() == Color.BLACK);
+                    || (opponentPieceAtForwardLeft && getColor() == Color.BLACK);
         }
         return columnsDiff == 0;
     }
