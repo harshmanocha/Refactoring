@@ -1,12 +1,20 @@
 package com.directi.training.codesmells.smelly.pieces;
 
-import com.directi.training.codesmells.smelly.Color;
+import com.directi.training.codesmells.refactored.Color;
+import com.directi.training.codesmells.refactored.chess.MoveUtil;
+import com.directi.training.codesmells.refactored.Position;
 
-public abstract class Rook extends Piece
+//Fixed Collapsing Hierarchy (another instance of lazy-class)
+public class Rook extends Piece
 {
     public Rook(Color color)
     {
-        super(color, 'r');
+        super(color);
+    }
+
+    public boolean isValidMove(Position from, Position to)
+    {
+        return MoveUtil.isHorizontalOrVerticalMove(from, to);
     }
 
     @Override
